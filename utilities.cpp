@@ -200,6 +200,11 @@ SDL_Texture *DISPLAYING_SCORE(char ch[],int a,int make_null)
     return convert;
 }
 
+void font_closing()
+{
+	TTF_CloseFont(Name_and_Score);
+}
+
 void name_write()
 {
 	gameover_page=0;
@@ -805,6 +810,7 @@ void lbutton()
 		if(fire_count>=50) fire_count=0;
 	}
 }
+
 
 
 

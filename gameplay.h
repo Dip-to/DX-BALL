@@ -22,5 +22,6 @@ int bar_and_bricks_render(int cnt,int l); //game_physics
 void powerup_achieve(); //game_physics
 void powerup_renderer(int p, int type); //game_physics
 void game_physics(); //game_physics
+void level_destroy(); //game_physics
 
 #endif

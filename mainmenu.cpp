@@ -1613,22 +1613,9 @@ void quit()
 	SDL_DestroyTexture(no_tex2);
 	SDL_DestroyTexture(options_tex);
 	SDL_DestroyTexture(tex);
-	// SDL_DestroyTexture(bricks1);
-	// SDL_DestroyTexture(bricks2);
-	// SDL_DestroyTexture(bricks3);
-	// SDL_DestroyTexture(bricks4);
-	// SDL_DestroyTexture(bricks5);
-	// SDL_DestroyTexture(bricks31);
-	// SDL_DestroyTexture(bricks32);
-	// SDL_DestroyTexture(bricks33);
-	// SDL_DestroyTexture(bricks34);
-	// SDL_DestroyTexture(bricks35);
-	// SDL_DestroyTexture(bricks36);
 	SDL_DestroyTexture(tex2);
 	SDL_DestroyTexture(liferend);
 	SDL_DestroyTexture(background1);
-	// SDL_DestroyTexture(firetex);
-	// SDL_DestroyTexture(score_ttf_tex);
 	SDL_DestroyTexture(gameover_tex);
 
 	gameover_tex=NULL;
@@ -1645,30 +1632,21 @@ void quit()
 	no_tex2=NULL;
 	options_tex=NULL;
 	tex=NULL;
-	// bricks1=NULL;
-	// bricks2=NULL;
-	// bricks3=NULL;
-	// bricks4=NULL;
-	// bricks5=NULL;
 	tex2=NULL;
 	liferend=NULL;
 	background1=NULL;
-	// firetex=NULL;
-	// score_ttf_tex=NULL;
 	
     Mix_FreeMusic(main_menu_music);
-	//digit[11],gbartex[4],fbartex[4],mbartex[4],mfbartex[4];
-	
 	for(int i=0; i<4; i++) SDL_DestroyTexture(gbartex[i].tex);
 	for(int i=0; i<4; i++) SDL_DestroyTexture(mbartex[i].tex);
 	for(int i=0; i<4; i++) SDL_DestroyTexture(fbartex[i].tex);
 	for(int i=0; i<4; i++) SDL_DestroyTexture(mfbartex[i].tex);
-	// TTF_CloseFont(Name_and_Score);
 	TTF_Quit();
 	IMG_Quit();
 	Mix_Quit();
 	SDL_Quit();
-	
+	font_closing();
+	level_destroy();
 }
 
 

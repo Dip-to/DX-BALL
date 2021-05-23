@@ -1197,5 +1197,27 @@ void game_physics()
 
 }
 
-
+void level_destroy()
+{
+	SDL_DestroyTexture(bricks1);
+	SDL_DestroyTexture(bricks2);
+	SDL_DestroyTexture(bricks3);
+	SDL_DestroyTexture(bricks4);
+	SDL_DestroyTexture(bricks5);
+	SDL_DestroyTexture(bricks31);
+	SDL_DestroyTexture(bricks32);
+	SDL_DestroyTexture(bricks33);
+	SDL_DestroyTexture(bricks34);
+	SDL_DestroyTexture(bricks35);
+	SDL_DestroyTexture(bricks36);
+	SDL_DestroyTexture(firetex);
+	SDL_DestroyTexture(score_ttf_tex);
+	bricks1=NULL;
+	bricks2=NULL;
+	bricks3=NULL;
+	bricks4=NULL;
+	bricks5=NULL;
+	firetex=NULL;
+	score_ttf_tex=NULL;
+}
 

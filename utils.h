@@ -88,6 +88,7 @@ void ball_music_and_powerup_load(); //utilities
 void quit(); //mainmenu
 void reset_game(int flag); //utilities
 void lbutton(); //utilities
+void font_closing(); //utilities
 
 
 #endif
