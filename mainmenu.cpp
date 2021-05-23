@@ -1510,10 +1510,6 @@ void mainmenu_level_renderer()
 				SDL_RenderCopy(rend, tex2, NULL, &ball);
 				
 				SDL_RenderPresent(rend);
-
-				//x_pos += (float) direction*(SCROLL_SPEED/60);
-				//if(x_pos==0||x_pos==(WINDOW_WIDTH-bar.w))
-				//	direction *= -1;
 			}
 		}
 		else if(level==2)
@@ -1629,7 +1625,6 @@ void quit()
 	// SDL_DestroyTexture(bricks35);
 	// SDL_DestroyTexture(bricks36);
 	SDL_DestroyTexture(tex2);
-	// SDL_DestroyTexture(scoretex);
 	SDL_DestroyTexture(liferend);
 	SDL_DestroyTexture(background1);
 	// SDL_DestroyTexture(firetex);
@@ -1656,7 +1651,6 @@ void quit()
 	// bricks4=NULL;
 	// bricks5=NULL;
 	tex2=NULL;
-	// scoretex=NULL;
 	liferend=NULL;
 	background1=NULL;
 	// firetex=NULL;

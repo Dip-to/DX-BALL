@@ -8,7 +8,8 @@
 #include <SDL2/SDL_mixer.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include<time.h>
+#include <time.h>
+#include "gameplay.h"
 
 extern int sound,gamesound,music_run;
 

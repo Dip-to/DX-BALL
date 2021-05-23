@@ -58,26 +58,17 @@ extern texarray gbartex[4],fbartex[4],mbartex[4],mfbartex[4],poweruptex[9],power
 extern hscoresturct highscore_array[20];
 extern bricksStruct bricks[150];
 
-extern double BALL_SPEED,theta;
-extern int totalbricks;
-
 extern Uint32 render_flags;
 extern SDL_Renderer* rend;
 extern SDL_Window* win;
 extern SDL_Surface* surface;
 extern SDL_Texture* gameover_tex;
-//game var
-extern int close,score,pause,gameover ,mainmenu,first_move,firehoise,first_bounce, bar_anim; //gameoverflag;
-extern int mbar,gbar,fbar,mfbar; //bar anim
+
+
 extern SDL_Texture *tex,*tex2,*liferend;
 extern SDL_Rect background,level_background,ball,powerup_rec,bar;
-extern float rect_x,pup_x, rect_y,pup_y, x_pos;
+
 extern SDL_Texture* background1,*background2,*background3,*level1_back,*level2_back,*level3_back;
-//gameplay
-extern double dx,dy; //ball speed direction
-extern float pspeed;
-extern int life,level,fspeed,sspeed,epaddle,spaddle;
-//gameplay
 
 
 
@@ -94,16 +85,9 @@ void highscore_render(); //mainmenu
 void pause_menu_renderer(); //mainmenu
 void help_render(); //mainmenu
 void ball_music_and_powerup_load(); //utilities
-void score_and_life_print(int score,int life);
-void firerender(int fbar);
-void bricks_and_bar_load();
-int bar_and_bricks_render(int cnt,int l);
-void powerup_achieve();
-void quit();
-void reset_game(int flag);
-void powerup_renderer(int p, int type);
-void game_physics();
-void lbutton();
+void quit(); //mainmenu
+void reset_game(int flag); //utilities
+void lbutton(); //utilities
 
 
 #endif

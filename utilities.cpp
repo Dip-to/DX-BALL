@@ -11,7 +11,7 @@ float max(float x, float y)
 	return y;
 }
 
-int gameover_page=0;
+int gameover_page=0,fire_count=0;
 SDL_Texture* convert=NULL;
 TTF_Font *Name_and_Score = NULL;
 SDL_Texture* background1=NULL;
@@ -698,6 +698,113 @@ int levelup_bricks_initialization(int level)
 
 }
 
+void reset_game(int flag)
+{
+		gameover = 0;
+		ball_move=0;
+		first_bounce=0;
+		bar.w=200;
+		pspeed=1.0;
+		bar.x = (int) (WINDOW_WIDTH-bar.w)/2;
+		bar.y = (int) WINDOW_HEIGHT - (WINDOW_HEIGHT*0.05);
+		ball.x = (int) bar.x+50;
+		ball.y = (int) WINDOW_HEIGHT - (WINDOW_HEIGHT*0.05)+ball.h;
+		rect_x =  ball.x;
+		rect_y =  ball.y;
+		x_pos=bar.x;
+		x_vel = BALL_SPEED;
+		y_vel = BALL_SPEED*-1;
+		gbar=mfbar=fbar=0;
+		mbar=1;
+		mainmenu=1;
+		music_run=1;
+
+		
+
+		for(int i=0; i<50; i++)
+		{
+			fire_rectarray1[i].show=fire_rectarray2[i].show=0;
+			if(i<9) power_up_map[i].type=0;
+		}
+
+		if(flag==1) //1 means mainmenut
+		{
+			first_move=1;
+			mainmenu=0;
+			life=3;
+			level=1;
+		
+		}
+		else if(flag==2) //2 means bricks zero or level up reeset
+		{
+			first_move=1;
+			rect_y = WINDOW_HEIGHT;
+			y_vel = 0;
+			x_vel = 0;
+			theta=30;
+			dx=BALL_SPEED*sin(theta*acos(-1)/180);
+			dy=BALL_SPEED*cos(theta*acos(-1)/180);
+			mainmenu=0;
+		}
+		else if(flag==3)
+		{
+			Mix_HaltMusic();
+			music_run=1;
+			score=0;
+			mainmenu=1-mainmenu;
+			mbar=1;
+			gbar=fbar=mfbar=0;
+			ball_move=0;
+			gameover = 0;
+			first_move=1;
+			ball_move=0;
+			bar.x = (int) (WINDOW_WIDTH-bar.w)/2;
+			bar.y = (int) WINDOW_HEIGHT - (WINDOW_HEIGHT*0.05);
+			ball.x = (int) bar.x+50;
+			ball.y = (int) WINDOW_HEIGHT - (WINDOW_HEIGHT*0.05)+ball.h;
+			rect_x =  ball.x;
+			rect_y =  ball.y;
+			x_pos=bar.x;
+			x_vel = BALL_SPEED;
+			y_vel = BALL_SPEED*-1;
+			for(int i=0; i<50; i++)
+			{
+				fire_rectarray1[i].show=fire_rectarray2[i].show=0;
+			}
+			life=3;
+			level=1;
+			bricks_showed=levelup_bricks_initialization(level);
+		}
+}
+void lbutton()
+{
+	if(first_move)
+	{
+		first_move=0;
+		ball_move=1;
+		gbar=1;
+		mbar=0;
+		dx=BALL_SPEED*sin(theta*acos(-1)/180),dy=BALL_SPEED*cos(theta*acos(-1)/180);
+	}
+	else ball_move=1;
+	if((mfbar or fbar) and ball_move)
+	{
+		if(gamesound==1)
+		Mix_PlayChannel(-1,fire_init,0);
+		fire_rectarray1[fire_count].rec.h=25;
+		fire_rectarray1[fire_count].rec.w=6;
+		fire_rectarray1[fire_count].rec.x=x_pos+9;
+		fire_rectarray1[fire_count].rec.y=bar.y-25;
+		fire_rectarray2[fire_count].rec.h=25;
+		fire_rectarray2[fire_count].rec.w=6;
+		fire_rectarray2[fire_count].rec.x=x_pos+bar.w-16;
+		fire_rectarray2[fire_count].rec.y=bar.y-25;
+		fire_rectarray1[fire_count].show=1;
+		fire_rectarray2[fire_count].show=1;
+		fire_count++;
+		if(fire_count>=50) fire_count=0;
+	}
+}
 
 
 
