@@ -1,4 +1,4 @@
-#include"utils.h"
+#include "header.h"
 
 //
 float x_vel = BALL_SPEED;
@@ -87,10 +87,10 @@ int main(int agr, char* args[])
  					switch(event.key.keysym.scancode)
 					{
 						case SDL_SCANCODE_LEFT:
-							x_pos = max(0,x_pos-(SCROLL_SPEED/20));
+							x_pos = max(0,x_pos-(SCROLL_SPEED)/5);
 							break;
 						case SDL_SCANCODE_RIGHT:
-							x_pos = min(WINDOW_WIDTH-bar.w,x_pos+(SCROLL_SPEED/20));
+							x_pos = min(WINDOW_WIDTH-bar.w,x_pos+(SCROLL_SPEED)/5);
 							break;
 						case SDL_SCANCODE_0:
 							gbar=1;

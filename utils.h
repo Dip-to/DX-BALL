@@ -1,7 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include"sound.h"
+#include "header.h"
 
 #define WINDOW_WIDTH (1800)
 #define WINDOW_HEIGHT (980)

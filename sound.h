@@ -1,15 +1,7 @@
 #ifndef SOUNDS_H
 #define SOUNDS_H
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_timer.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include "gameplay.h"
+#include "header.h"
 
 extern int sound,gamesound,music_run;
 
