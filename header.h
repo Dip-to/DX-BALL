@@ -13,5 +13,6 @@
 #include "utils.h"
 #include "sound.h"
 #include "gameplay.h"
+#include <math.h>
 
 #endif
