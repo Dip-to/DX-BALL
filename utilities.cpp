@@ -781,6 +781,7 @@ void reset_game(int flag)
 			bricks_showed=levelup_bricks_initialization(level);
 		}
 }
+
 void lbutton()
 {
 	if(first_move)

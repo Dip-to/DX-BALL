@@ -1,6 +1,6 @@
 #include "header.h"
 
-int level2,level1,level3,enter=0,uivar=0;
+int level2,level1,level3,enter=0,uivar=1;
 int Hscore=0,Help=0,Instruction=0,Controls=0,Powerup_info=0,Instruction2=0,option=0,game_sesh=0,next_button=0;
 //main menu
 SDL_Rect instruction,controls,powerup_info,high_up,high_body,next,control_body,powerup_info_body,instruction_body;
@@ -771,73 +771,66 @@ void mainmenu_load()
 
 int mainmenu_render()
 {
+	if(sound==1 and music_run and (mainmenu))
+	{
+		Mix_PlayMusic(main_menu_music,-1);
+		music_run=0;
+	}
 	while(mainmenu)
 	{
-			SDL_Event ev;
+		SDL_Event ev;
  		while(SDL_PollEvent(&ev))
 		{
-
 			if(ev.type==SDL_QUIT)
 			{
  					close = 1;
+					mainmenu=0;
 			}
-
 			else if(ev.type==SDL_KEYDOWN)
 			{
-				switch(ev.key.keysym.sym)
+				if(uivar==0)
 				{
-					case SDLK_LEFT:
-					   if(uivar==0) continue;
-					   else if(uivar==1) continue;
-					   else if(uivar==2) uivar=1;
-					   else if(uivar==3) continue;
-					   else if(uivar==4) uivar=3;
-					   else if(uivar==5) continue;
-
-					case SDLK_RIGHT:
-					   if(uivar==0) uivar=1;
-					   else if(uivar==1) uivar=2;
-					   else if(uivar==2) continue;
-					   else if(uivar==3) uivar=4;
-					   else if(uivar==4) continue;
-					   else if(uivar==5) continue;
-
-					case SDLK_DOWN:
-					   if(uivar==0) uivar=1;
-					   else if(uivar==1) uivar=3;
-					   else if(uivar==2) uivar=4;
-					   else if(uivar==3) continue;
-					   else if(uivar==4) uivar=5;
-					   else if(uivar==5) continue;
-					case SDLK_UP:
-					   if(uivar==0)
-					   continue;
-					   else if(uivar==1)
-					   continue;
-					   else if(uivar==2)
-					   continue;
-					   else if(uivar==3)
-					   uivar=1;
-					   else if(uivar==4)
-					   uivar=2;
-					   else if(uivar==5)
-					   uivar=4;
-					case SDL_SCANCODE_KP_ENTER:
-					  if(uivar==0)
-					   continue;
-					   else if(uivar==1)
-					   enter=1;
-					   else if(uivar==2)
-					   enter=2;
-					   else if(uivar==3)
-					   enter=3;
-					   else if(uivar==4)
-					   enter=4;
-					   else if(uivar==5)
-					   enter=5;  
-
+					if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT or ev.key.keysym.scancode==SDL_SCANCODE_UP) uivar=1;
+					else if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT or ev.key.keysym.scancode==SDL_SCANCODE_DOWN) uivar=1;
+					break;
 				}
-				printf("%d\n",uivar);
+				else if(uivar==1)
+				{
+					if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT or ev.key.keysym.scancode==SDL_SCANCODE_UP);
+					else if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT) uivar=2;
+					else if(ev.key.keysym.scancode==SDL_SCANCODE_DOWN) uivar=3;
+					break;
+				}
+				else if(uivar==2)
+				{
+					if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT or ev.key.keysym.scancode==SDL_SCANCODE_UP);
+					else if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT) uivar=1;
+					else if(ev.key.keysym.scancode==SDL_SCANCODE_DOWN) uivar=4;
+					break;
+				}
+				if(uivar==3)
+				{
+					if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT);
+					else if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT) uivar=4;
+					else if(ev.key.keysym.scancode==SDL_SCANCODE_DOWN) uivar=5;
+					else if(ev.key.keysym.scancode==SDL_SCANCODE_UP) uivar=1;
+					break;
+				}
+				if(uivar==4)
+				{
+					if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT);
+					else if(ev.key.keysym.scancode==SDL_SCANCODE_UP) uivar=2;
+					else if(ev.key.keysym.scancode==SDL_SCANCODE_DOWN) uivar=5;
+					else if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT) uivar=3;
+					break;
+				}
+				if(uivar==5)
+				{
+					if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT or ev.key.keysym.scancode==SDL_SCANCODE_DOWN);
+					else if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT);
+					else if(ev.key.keysym.scancode==SDL_SCANCODE_UP) uivar=3;
+					break;
+				}
 			}
 		}
 			int mmmousex,mmmousey;
@@ -851,53 +844,53 @@ int mainmenu_render()
 				{
 					uivar=1;
 					SDL_RenderCopy(rend,New_game_tex,NULL,&New_game);
-					if(enter==1 || mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+					if(ev.key.keysym.scancode==SDL_SCANCODE_RETURN || mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
 					{
+						uivar=0;
 						reset_game(3);
 					}
 				}
-				if(uivar==3 || mmmousex>=help.x && mmmousex<=(help.x+help.w) && mmmousey>=help.y && mmmousey<=(help.y+help.h))
+				if(uivar==4 || mmmousex>=help.x && mmmousex<=(help.x+help.w) && mmmousey>=help.y && mmmousey<=(help.y+help.h))
 				{
-					uivar=3;
+					uivar=4;
 					SDL_RenderCopy(rend,help_tex,NULL,&help);
-					if(enter==3 ||mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+					if(ev.key.keysym.scancode==SDL_SCANCODE_RETURN ||mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
 					{
 						Help=1;
-						if(Help==1) help_render();
-						
+						uivar=0;
+						if(Help==1) help_render();		
 					}
 				}
-				
 				if(uivar==2 || mmmousex>=high_score.x && mmmousex<=(high_score.x+high_score.w) && mmmousey>=high_score.y && mmmousey<=(high_score.y+high_score.h))
 				{
 					uivar=2;
 					SDL_RenderCopy(rend,high_score_tex,NULL,&high_score);
-					if(enter==2 ||mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+					if(ev.key.keysym.scancode==SDL_SCANCODE_RETURN ||mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
 					{
+						uivar=0;
 						Hscore=1;
 						if(Hscore==1) highscore_render();
 						
 					}
 				}
-				
-				if(uivar==4 || mmmousex>=options.x && mmmousex<=(options.x+options.w) && mmmousey>=options.y && mmmousey<=(options.y+options.h))
+				if(uivar==3 || mmmousex>=options.x && mmmousex<=(options.x+options.w) && mmmousey>=options.y && mmmousey<=(options.y+options.h))
 				{
-					uivar=4;
+					uivar=3;
 					SDL_RenderCopy(rend,options_tex,NULL,&options);
-					if(enter==4 ||mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+					if(ev.key.keysym.scancode==SDL_SCANCODE_RETURN ||mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
 					{
+						uivar=0;
 						option=1;
 						if(option==1) option_render();
 					}
 				}
-				
-
 				if(uivar==5 || mmmousex>=exi.x && mmmousex<=(exi.x+exi.w) && mmmousey>=exi.y && mmmousey<=(exi.y+exi.h))
 				{
 					uivar=5;
 					SDL_RenderCopy(rend,exit_tex,NULL,&exi);
-					if(enter==5 ||mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+					if(ev.key.keysym.scancode==SDL_SCANCODE_RETURN ||mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
 					{
+						uivar=0;
 						game_sesh=1;
 					}
 				}
@@ -934,10 +927,9 @@ int mainmenu_render()
 			
 			SDL_RenderPresent(rend);
 			SDL_Delay(1000/60);
-			return 1;
 		
-		
-	}		
+	}	
+	return 1;
 
 }
 
@@ -1130,7 +1122,11 @@ void highscore_render()
 			{
 				if(hmousex>=back.x && hmousex<=(back.x+back.w) && hmousey>=back.y && hmousey<=(back.y+back.h))
 				{
-					if(next_button==0) Hscore=0;
+					printf("%d\n",next_button);
+					if(next_button==0) 
+					{
+						Hscore=0;
+					}
 					else next_button=0;
 					break;		
 				}
@@ -1542,15 +1538,11 @@ void mainmenu_level_renderer()
 		
 		if(!mainmenu_render()) close=1;
 		//printf("%d %d\n",sound,music_run);
-		if(sound==1 and music_run and (mainmenu))
-		{
-			Mix_PlayMusic(main_menu_music,-1);
-			music_run=0;
-		}
+		
 		level2=1;
 		level3=1;
 		level1=1;
-		uivar=0;
+		//uivar=0;
 		
 	}
 	else if(gameover==0 and pause)
@@ -1678,7 +1670,8 @@ void mainmenu_level_renderer()
 }
 
 void quit()
-{
+{ 
+	
 	SDL_Delay(1000/60);
  	SDL_DestroyRenderer(rend);
  	SDL_DestroyWindow(win);
@@ -1723,12 +1716,12 @@ void quit()
 	for(int i=0; i<4; i++) SDL_DestroyTexture(mbartex[i].tex);
 	for(int i=0; i<4; i++) SDL_DestroyTexture(fbartex[i].tex);
 	for(int i=0; i<4; i++) SDL_DestroyTexture(mfbartex[i].tex);
+	font_closing();
+	level_destroy();
 	TTF_Quit();
 	IMG_Quit();
 	Mix_Quit();
 	SDL_Quit();
-	font_closing();
-	level_destroy();
 }
 
 
