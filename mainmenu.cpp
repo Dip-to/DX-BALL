@@ -1,6 +1,6 @@
 #include "header.h"
 
-int level2,level1,level3,enter=0,uivar=1;
+int level2,level1,level3,enter=0,uivar=0,pvar=0;
 int Hscore=0,Help=0,Instruction=0,Controls=0,Powerup_info=0,Instruction2=0,option=0,game_sesh=0,next_button=0;
 //main menu
 SDL_Rect instruction,controls,powerup_info,high_up,high_body,next,control_body,powerup_info_body,instruction_body;
@@ -1448,87 +1448,156 @@ void pause_menu_renderer()
 		Mix_PlayMusic(main_menu_music,-1);
 		music_run=0;
 	}
-	int mmmousex,mmmousey;
-    int mmbuttons=SDL_GetMouseState(&mmmousex,&mmmousey);	
-  	SDL_RenderClear(rend);
-  	SDL_RenderCopy(rend,pause_back_tex,NULL,&background_main_menu);
-	if(mmmousex>=New_game.x && mmmousex<=(New_game.x+New_game.w) && mmmousey>=New_game.y && mmmousey<=(New_game.y+New_game.h))
-	{ 
-		SDL_RenderCopy(rend,continue_tex,NULL,&New_game); //here continue is on previous newgame's location
-		if(mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
-		{
-			pause=1-pause;
-			Mix_HaltMusic();
-			music_run=1;
-		}
-	}
-	if(mmmousex>=high_score.x && mmmousex<=(high_score.x+high_score.w) && mmmousey>=high_score.y && mmmousey<=(high_score.y+high_score.h))
+	while(pause)
 	{
-		SDL_RenderCopy(rend,New_game_tex,NULL,&high_score); //here new game's loaction is on previous highscore's location
-		if(mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+		SDL_Event evp;
+ 		while(SDL_PollEvent(&evp))
 		{
-			reset_game(3);
-		}
-	}
-	if(mmmousex>=help.x && mmmousex<=(help.x+help.w) && mmmousey>=help.y && mmmousey<=(help.y+help.h))
-	{
-		SDL_RenderCopy(rend,help_tex,NULL,&help);
-		if(mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
-		{
-			Help=1;
-			if(Help==1) help_render();
-			
-		}
-	}
-	if(mmmousex>=options.x && mmmousex<=(options.x+options.w) && mmmousey>=options.y && mmmousey<=(options.y+options.h))
-	{
-		SDL_RenderCopy(rend,options_tex,NULL,&options);
-		if(mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
-		{
-			option=1;
-			if(option==1) option_render();
-		}
-	}
-	if(mmmousex>=exi.x && mmmousex<=(exi.x+exi.w) && mmmousey>=exi.y && mmmousey<=(exi.y+exi.h))
-	{
-		SDL_RenderCopy(rend,exit_tex,NULL,&exi);
-		if(mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
-		{
-			game_sesh=1;
-		}
-	}
-	if(game_sesh)
-	{
-		SDL_RenderCopy(rend,exit_back_tex,NULL,&exit_back);
-		SDL_RenderCopy(rend,r_u_sure_tex,NULL,&r_u_sure);
-		SDL_RenderCopy(rend,no_tex,NULL,&no);
-		if(mmmousex>=yes.x && mmmousex<=(yes.x+yes.w) && mmmousey>=yes.y && mmmousey<=(yes.y+yes.h))
-		{
-			SDL_RenderCopy(rend,yes_tex2,NULL,&yes);
-			int mousex, mousey;
-			int buttons = SDL_GetMouseState(&mousex, &mousey);
-			if(buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+			if(evp.type==SDL_QUIT)
 			{
-				close=1;
-				return ;
+ 					close = 1;
+					pause=1-pause;
+			}
+			else if(evp.type==SDL_KEYDOWN)
+			{
+				if(pvar==0)
+				{
+					if(evp.key.keysym.scancode==SDL_SCANCODE_LEFT or evp.key.keysym.scancode==SDL_SCANCODE_UP) pvar=1;
+					else if(evp.key.keysym.scancode==SDL_SCANCODE_RIGHT or evp.key.keysym.scancode==SDL_SCANCODE_DOWN) pvar=1;
+					break;
+				}
+				else if(pvar==1)
+				{
+					if(evp.key.keysym.scancode==SDL_SCANCODE_LEFT or evp.key.keysym.scancode==SDL_SCANCODE_UP);
+					else if(evp.key.keysym.scancode==SDL_SCANCODE_RIGHT) pvar=2;
+					else if(evp.key.keysym.scancode==SDL_SCANCODE_DOWN) pvar=3;
+					break;
+				}
+				else if(pvar==2)
+				{
+					if(evp.key.keysym.scancode==SDL_SCANCODE_RIGHT or evp.key.keysym.scancode==SDL_SCANCODE_UP);
+					else if(evp.key.keysym.scancode==SDL_SCANCODE_LEFT) pvar=1;
+					else if(evp.key.keysym.scancode==SDL_SCANCODE_DOWN) pvar=4;
+					break;
+				}
+				if(pvar==3)
+				{
+					if(evp.key.keysym.scancode==SDL_SCANCODE_LEFT);
+					else if(evp.key.keysym.scancode==SDL_SCANCODE_RIGHT) pvar=4;
+					else if(evp.key.keysym.scancode==SDL_SCANCODE_DOWN) pvar=5;
+					else if(evp.key.keysym.scancode==SDL_SCANCODE_UP) pvar=1;
+					break;
+				}
+				if(pvar==4)
+				{
+					if(evp.key.keysym.scancode==SDL_SCANCODE_RIGHT);
+					else if(evp.key.keysym.scancode==SDL_SCANCODE_UP) pvar=2;
+					else if(evp.key.keysym.scancode==SDL_SCANCODE_DOWN) pvar=5;
+					else if(evp.key.keysym.scancode==SDL_SCANCODE_LEFT) pvar=3;
+					break;
+				}
+				if(pvar==5)
+				{
+					if(evp.key.keysym.scancode==SDL_SCANCODE_RIGHT or evp.key.keysym.scancode==SDL_SCANCODE_DOWN);
+					else if(evp.key.keysym.scancode==SDL_SCANCODE_LEFT);
+					else if(evp.key.keysym.scancode==SDL_SCANCODE_UP) pvar=3;
+					break;
+				}
 			}
 		}
-		else SDL_RenderCopy(rend,yes_tex,NULL,&yes);
-		if(mmmousex>=no.x && mmmousex<=(no.x+no.w) && mmmousey>=no.y && mmmousey<=(no.y+no.h))
-		{
-			SDL_RenderCopy(rend,no_tex2,NULL,&no);
-			int mousex, mousey;
-			int buttons = SDL_GetMouseState(&mousex, &mousey);
-			if(buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+		int mmmousex,mmmousey;
+		int mmbuttons=SDL_GetMouseState(&mmmousex,&mmmousey);	
+		SDL_RenderClear(rend);
+		SDL_RenderCopy(rend,pause_back_tex,NULL,&background_main_menu);
+		if(pvar==1 || mmmousex>=New_game.x && mmmousex<=(New_game.x+New_game.w) && mmmousey>=New_game.y && mmmousey<=(New_game.y+New_game.h))
+		{ 
+			pvar=1;
+			SDL_RenderCopy(rend,continue_tex,NULL,&New_game); //here continue is on previous newgame's location
+			if(evp.key.keysym.scancode==SDL_SCANCODE_RETURN || mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
 			{
-				game_sesh=0;
+				pvar=0;
+				pause=1-pause;
+				Mix_HaltMusic();
+				music_run=1;
 			}
 		}
-		else SDL_RenderCopy(rend,no_tex,NULL,&no);
-	}
+		if(pvar==2 || mmmousex>=high_score.x && mmmousex<=(high_score.x+high_score.w) && mmmousey>=high_score.y && mmmousey<=(high_score.y+high_score.h))
+		{
+			pvar=2;
+			SDL_RenderCopy(rend,New_game_tex,NULL,&high_score); //here new game's loaction is on previous highscore's location
+			if(evp.key.keysym.scancode==SDL_SCANCODE_RETURN || mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+			{
+				pvar=0;
+				reset_game(3);
+			}
+		}
+		if(pvar==4 || mmmousex>=help.x && mmmousex<=(help.x+help.w) && mmmousey>=help.y && mmmousey<=(help.y+help.h))
+		{
+			pvar=4;
+			SDL_RenderCopy(rend,help_tex,NULL,&help);
+			if(evp.key.keysym.scancode==SDL_SCANCODE_RETURN || mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+			{
+				pvar=0;
+				Help=1;
+				if(Help==1) help_render();
 				
+			}
+		}
+		if(pvar==3 || mmmousex>=options.x && mmmousex<=(options.x+options.w) && mmmousey>=options.y && mmmousey<=(options.y+options.h))
+		{
+			pvar=3;
+			SDL_RenderCopy(rend,options_tex,NULL,&options);
+			if(evp.key.keysym.scancode==SDL_SCANCODE_RETURN || mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+			{
+				pvar=0;
+				option=1;
+				if(option==1) option_render();
+			}
+		}
+		if(pvar==5 || mmmousex>=exi.x && mmmousex<=(exi.x+exi.w) && mmmousey>=exi.y && mmmousey<=(exi.y+exi.h))
+		{
+			pvar=5;
+			SDL_RenderCopy(rend,exit_tex,NULL,&exi);
+			if(evp.key.keysym.scancode==SDL_SCANCODE_RETURN || mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+			{
+				pvar=0;
+				game_sesh=1;
+			}
+		}
+		if(game_sesh)
+		{
+			SDL_RenderCopy(rend,exit_back_tex,NULL,&exit_back);
+			SDL_RenderCopy(rend,r_u_sure_tex,NULL,&r_u_sure);
+			SDL_RenderCopy(rend,no_tex,NULL,&no);
+			if(mmmousex>=yes.x && mmmousex<=(yes.x+yes.w) && mmmousey>=yes.y && mmmousey<=(yes.y+yes.h))
+			{
+				SDL_RenderCopy(rend,yes_tex2,NULL,&yes);
+				int mousex, mousey;
+				int buttons = SDL_GetMouseState(&mousex, &mousey);
+				if(buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+				{
+					close=1;
+					return ;
+				}
+			}
+			else SDL_RenderCopy(rend,yes_tex,NULL,&yes);
+			if(mmmousex>=no.x && mmmousex<=(no.x+no.w) && mmmousey>=no.y && mmmousey<=(no.y+no.h))
+			{
+				SDL_RenderCopy(rend,no_tex2,NULL,&no);
+				int mousex, mousey;
+				int buttons = SDL_GetMouseState(&mousex, &mousey);
+				if(buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+				{
+					game_sesh=0;
+				}
+			}
+			else SDL_RenderCopy(rend,no_tex,NULL,&no);
+		}
+					
 
-  	SDL_RenderPresent(rend);
+		SDL_RenderPresent(rend);
+	}
+		
 }
 
 void mainmenu_level_renderer()
