@@ -1,6 +1,6 @@
 #include "header.h"
 
-int level2,level1,level3;
+int level2,level1,level3,enter=0,uivar=0;
 int Hscore=0,Help=0,Instruction=0,Controls=0,Powerup_info=0,Instruction2=0,option=0,game_sesh=0,next_button=0;
 //main menu
 SDL_Rect instruction,controls,powerup_info,high_up,high_body,next,control_body,powerup_info_body,instruction_body;
@@ -771,94 +771,174 @@ void mainmenu_load()
 
 int mainmenu_render()
 {
+	while(mainmenu)
+	{
+			SDL_Event ev;
+ 		while(SDL_PollEvent(&ev))
+		{
+
+			if(ev.type==SDL_QUIT)
+			{
+ 					close = 1;
+			}
+
+			else if(ev.type==SDL_KEYDOWN)
+			{
+				switch(ev.key.keysym.sym)
+				{
+					case SDLK_LEFT:
+					   if(uivar==0) continue;
+					   else if(uivar==1) continue;
+					   else if(uivar==2) uivar=1;
+					   else if(uivar==3) continue;
+					   else if(uivar==4) uivar=3;
+					   else if(uivar==5) continue;
+
+					case SDLK_RIGHT:
+					   if(uivar==0) uivar=1;
+					   else if(uivar==1) uivar=2;
+					   else if(uivar==2) continue;
+					   else if(uivar==3) uivar=4;
+					   else if(uivar==4) continue;
+					   else if(uivar==5) continue;
+
+					case SDLK_DOWN:
+					   if(uivar==0) uivar=1;
+					   else if(uivar==1) uivar=3;
+					   else if(uivar==2) uivar=4;
+					   else if(uivar==3) continue;
+					   else if(uivar==4) uivar=5;
+					   else if(uivar==5) continue;
+					case SDLK_UP:
+					   if(uivar==0)
+					   continue;
+					   else if(uivar==1)
+					   continue;
+					   else if(uivar==2)
+					   continue;
+					   else if(uivar==3)
+					   uivar=1;
+					   else if(uivar==4)
+					   uivar=2;
+					   else if(uivar==5)
+					   uivar=4;
+					case SDL_SCANCODE_KP_ENTER:
+					  if(uivar==0)
+					   continue;
+					   else if(uivar==1)
+					   enter=1;
+					   else if(uivar==2)
+					   enter=2;
+					   else if(uivar==3)
+					   enter=3;
+					   else if(uivar==4)
+					   enter=4;
+					   else if(uivar==5)
+					   enter=5;  
+
+				}
+				printf("%d\n",uivar);
+			}
+		}
 			int mmmousex,mmmousey;
         	int mmbuttons=SDL_GetMouseState(&mmmousex,&mmmousey);	
 	        SDL_RenderClear(rend);
 			SDL_RenderCopy(rend,mainback_tex,NULL,&background_main_menu);
+ 			
+ 			
 
-			if(mmmousex>=New_game.x && mmmousex<=(New_game.x+New_game.w) && mmmousey>=New_game.y && mmmousey<=(New_game.y+New_game.h))
-            {
-		      	SDL_RenderCopy(rend,New_game_tex,NULL,&New_game);
-				if(mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+				if(uivar==1 || mmmousex>=New_game.x && mmmousex<=(New_game.x+New_game.w) && mmmousey>=New_game.y && mmmousey<=(New_game.y+New_game.h))
 				{
-                    reset_game(3);
-				}
-			}
-			if(mmmousex>=help.x && mmmousex<=(help.x+help.w) && mmmousey>=help.y && mmmousey<=(help.y+help.h))
-			{
-            	SDL_RenderCopy(rend,help_tex,NULL,&help);
-				if(mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
-				{
-					Help=1;
-					if(Help==1) help_render();
-					
-				}
-			}
-            
-            if(mmmousex>=high_score.x && mmmousex<=(high_score.x+high_score.w) && mmmousey>=high_score.y && mmmousey<=(high_score.y+high_score.h))
-			{
-            	SDL_RenderCopy(rend,high_score_tex,NULL,&high_score);
-				if(mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
-				{
-					Hscore=1;
-					if(Hscore==1) highscore_render();
-					
-				}
-			}
-            
-			if(mmmousex>=options.x && mmmousex<=(options.x+options.w) && mmmousey>=options.y && mmmousey<=(options.y+options.h))
-			{
-            	SDL_RenderCopy(rend,options_tex,NULL,&options);
-				if(mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
-				{
-					option=1;
-					if(option==1) option_render();
-				}
-			}
-            
-
-            if(mmmousex>=exi.x && mmmousex<=(exi.x+exi.w) && mmmousey>=exi.y && mmmousey<=(exi.y+exi.h))
-			{
-            	SDL_RenderCopy(rend,exit_tex,NULL,&exi);
-				if(mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
-				{
-					game_sesh=1;
-				}
-			}
-			if(game_sesh)
-			{
-				SDL_RenderCopy(rend,exit_back_tex,NULL,&exit_back);
-				SDL_RenderCopy(rend,r_u_sure_tex,NULL,&r_u_sure);
-				SDL_RenderCopy(rend,no_tex,NULL,&no);
-				if(mmmousex>=yes.x && mmmousex<=(yes.x+yes.w) && mmmousey>=yes.y && mmmousey<=(yes.y+yes.h))
-				{
-					SDL_RenderCopy(rend,yes_tex2,NULL,&yes);
-					int mousex, mousey;
-					int buttons = SDL_GetMouseState(&mousex, &mousey);
-					if(buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+					uivar=1;
+					SDL_RenderCopy(rend,New_game_tex,NULL,&New_game);
+					if(enter==1 || mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
 					{
-						close=1;
-						return 0;
+						reset_game(3);
 					}
 				}
-				else SDL_RenderCopy(rend,yes_tex,NULL,&yes);
-				if(mmmousex>=no.x && mmmousex<=(no.x+no.w) && mmmousey>=no.y && mmmousey<=(no.y+no.h))
+				if(uivar==3 || mmmousex>=help.x && mmmousex<=(help.x+help.w) && mmmousey>=help.y && mmmousey<=(help.y+help.h))
 				{
-					SDL_RenderCopy(rend,no_tex2,NULL,&no);
-					int mousex, mousey;
-					int buttons = SDL_GetMouseState(&mousex, &mousey);
-					if(buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+					uivar=3;
+					SDL_RenderCopy(rend,help_tex,NULL,&help);
+					if(enter==3 ||mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
 					{
-						game_sesh=0;
+						Help=1;
+						if(Help==1) help_render();
+						
 					}
 				}
-				else SDL_RenderCopy(rend,no_tex,NULL,&no);
-			}
+				
+				if(uivar==2 || mmmousex>=high_score.x && mmmousex<=(high_score.x+high_score.w) && mmmousey>=high_score.y && mmmousey<=(high_score.y+high_score.h))
+				{
+					uivar=2;
+					SDL_RenderCopy(rend,high_score_tex,NULL,&high_score);
+					if(enter==2 ||mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+					{
+						Hscore=1;
+						if(Hscore==1) highscore_render();
+						
+					}
+				}
+				
+				if(uivar==4 || mmmousex>=options.x && mmmousex<=(options.x+options.w) && mmmousey>=options.y && mmmousey<=(options.y+options.h))
+				{
+					uivar=4;
+					SDL_RenderCopy(rend,options_tex,NULL,&options);
+					if(enter==4 ||mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+					{
+						option=1;
+						if(option==1) option_render();
+					}
+				}
+				
+
+				if(uivar==5 || mmmousex>=exi.x && mmmousex<=(exi.x+exi.w) && mmmousey>=exi.y && mmmousey<=(exi.y+exi.h))
+				{
+					uivar=5;
+					SDL_RenderCopy(rend,exit_tex,NULL,&exi);
+					if(enter==5 ||mmbuttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+					{
+						game_sesh=1;
+					}
+				}
+				if(game_sesh)
+				{
+					SDL_RenderCopy(rend,exit_back_tex,NULL,&exit_back);
+					SDL_RenderCopy(rend,r_u_sure_tex,NULL,&r_u_sure);
+					SDL_RenderCopy(rend,no_tex,NULL,&no);
+					if(mmmousex>=yes.x && mmmousex<=(yes.x+yes.w) && mmmousey>=yes.y && mmmousey<=(yes.y+yes.h))
+					{
+						SDL_RenderCopy(rend,yes_tex2,NULL,&yes);
+						int mousex, mousey;
+						int buttons = SDL_GetMouseState(&mousex, &mousey);
+						if(buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+						{
+							close=1;
+							return 0;
+						}
+					}
+					else SDL_RenderCopy(rend,yes_tex,NULL,&yes);
+					if(mmmousex>=no.x && mmmousex<=(no.x+no.w) && mmmousey>=no.y && mmmousey<=(no.y+no.h))
+					{
+						SDL_RenderCopy(rend,no_tex2,NULL,&no);
+						int mousex, mousey;
+						int buttons = SDL_GetMouseState(&mousex, &mousey);
+						if(buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+						{
+							game_sesh=0;
+						}
+					}
+					else SDL_RenderCopy(rend,no_tex,NULL,&no);
+				}
 
 			
 			SDL_RenderPresent(rend);
 			SDL_Delay(1000/60);
 			return 1;
+		
+		
+	}		
+
 }
 
 void option_render()
@@ -1458,19 +1538,21 @@ void pause_menu_renderer()
 void mainmenu_level_renderer()
 {
 	if(mainmenu==1)
+	{
+		
+		if(!mainmenu_render()) close=1;
+		//printf("%d %d\n",sound,music_run);
+		if(sound==1 and music_run and (mainmenu))
 		{
-			if(!mainmenu_render()) close=1;
-			//printf("%d %d\n",sound,music_run);
-			if(sound==1 and music_run and (mainmenu))
-			{
-				Mix_PlayMusic(main_menu_music,-1);
-				music_run=0;
-			}
-			level2=1;
-			level3=1;
-			level1=1;
-			
+			Mix_PlayMusic(main_menu_music,-1);
+			music_run=0;
 		}
+		level2=1;
+		level3=1;
+		level1=1;
+		uivar=0;
+		
+	}
 	else if(gameover==0 and pause)
 	{
 		pause_menu_renderer();
