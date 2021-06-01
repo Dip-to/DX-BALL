@@ -1,6 +1,6 @@
 #include "header.h"
 
-int level2,level1,level3,enter=0,uivar=0,pvar=0,ovar=0,hvar=0,povar=0,covar=0,ivar=0,nvar=0;
+int level2,level1,level3,enter=0,uivar=0,pvar=0,ovar=0,hvar=0,povar=0,covar=0,ivar=0,nvar=0,evar=0;
 int Hscore=0,Help=0,Instruction=0,Controls=0,Powerup_info=0,Instruction2=0,option=0,game_sesh=0,next_button=0;
 //main menu
 SDL_Rect instruction,controls,powerup_info,high_up,high_body,next,control_body,powerup_info_body,instruction_body;
@@ -896,29 +896,37 @@ int mainmenu_render()
 				}
 				if(game_sesh)
 				{
+
+					evar=0;
+					if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT) evar=1;
+					else if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT) evar=2;
 					SDL_RenderCopy(rend,exit_back_tex,NULL,&exit_back);
 					SDL_RenderCopy(rend,r_u_sure_tex,NULL,&r_u_sure);
 					SDL_RenderCopy(rend,no_tex,NULL,&no);
-					if(mmmousex>=yes.x && mmmousex<=(yes.x+yes.w) && mmmousey>=yes.y && mmmousey<=(yes.y+yes.h))
+					if(evar==1 || mmmousex>=yes.x && mmmousex<=(yes.x+yes.w) && mmmousey>=yes.y && mmmousey<=(yes.y+yes.h))
 					{
+						evar=1;
 						SDL_RenderCopy(rend,yes_tex2,NULL,&yes);
 						int mousex, mousey;
 						int buttons = SDL_GetMouseState(&mousex, &mousey);
-						if(buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+						if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT || (buttons && SDL_BUTTON(SDL_BUTTON_LEFT)))
 						{
 							close=1;
+							evar=0;
 							return 0;
 						}
 					}
 					else SDL_RenderCopy(rend,yes_tex,NULL,&yes);
-					if(mmmousex>=no.x && mmmousex<=(no.x+no.w) && mmmousey>=no.y && mmmousey<=(no.y+no.h))
+					if(evar==2 || mmmousex>=no.x && mmmousex<=(no.x+no.w) && mmmousey>=no.y && mmmousey<=(no.y+no.h))
 					{
+						evar=2;
 						SDL_RenderCopy(rend,no_tex2,NULL,&no);
 						int mousex, mousey;
 						int buttons = SDL_GetMouseState(&mousex, &mousey);
-						if(buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+						if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT || (buttons && SDL_BUTTON(SDL_BUTTON_LEFT)))
 						{
 							game_sesh=0;
+							evar=0;
 						}
 					}
 					else SDL_RenderCopy(rend,no_tex,NULL,&no);
@@ -1257,10 +1265,11 @@ void highscore_render()
 			{
 				nvar=1;
 				SDL_RenderCopy(rend,next2_tex,NULL,&next);
-				if(hevent.key.keysym.scancode==SDL_SCANCODE_RETURN || SDL_BUTTON(SDL_BUTTON_LEFT))
+				if(hevent.key.keysym.scancode==SDL_SCANCODE_RIGHT || (hbuttons && SDL_BUTTON(SDL_BUTTON_LEFT)))
 				{
 					next_button=1;
 					nvar=0;
+					
 				}
 			}
 			else SDL_RenderCopy(rend,next_tex,NULL,&next);
@@ -1563,7 +1572,7 @@ void help_render()
 			{
 				ivar=1;
 				SDL_RenderCopy(rend,next2_tex,NULL,&next);
-				if( heevent.key.keysym.scancode==SDL_SCANCODE_RETURN || SDL_BUTTON(SDL_BUTTON_LEFT))
+				if(heevent.key.keysym.scancode==SDL_SCANCODE_RIGHT || (hcbuttons && SDL_BUTTON(SDL_BUTTON_LEFT)))
 				{
 					Instruction2=1;	
 					ivar=0;
