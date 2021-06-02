@@ -788,7 +788,33 @@ int mainmenu_render()
 			}
 			else if(ev.type==SDL_KEYDOWN)
 			{
-				if(uivar==0)
+
+				if(game_sesh==1)
+				{
+					if(ev.key.keysym.scancode==SDL_SCANCODE_ESCAPE)
+					{
+						if(game_sesh)
+						game_sesh=0;
+						break;
+					}
+
+					if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT)
+					{
+						if(evar==2)
+						evar=1;
+						else if(evar==0) evar=1;
+						break;
+					}
+
+					if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT)
+					{
+						if(evar==1)
+						evar=2;
+						else if(evar==0) evar=1;
+						break;
+					}
+				}
+				else if(uivar==0)
 				{
 					if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT or ev.key.keysym.scancode==SDL_SCANCODE_UP) uivar=1;
 					else if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT or ev.key.keysym.scancode==SDL_SCANCODE_DOWN) uivar=1;
@@ -833,31 +859,14 @@ int mainmenu_render()
 				}
 
 				
-			}
-
-
-			if(ev.key.keysym.scancode==SDL_SCANCODE_ESCAPE)
-			{
-				if(game_sesh)
-				game_sesh=0;
+			
 				
 			}
 
-			if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT)
-			{
-				if(evar==2)
-				evar=1;
-				else if(evar==0) evar=1;
-				
-			}
 
-			if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT)
-			{
-				if(evar==1)
-				evar=2;
-				else if(evar==0) evar=1;
-				
-			}
+		
+			
+
 			
 		}
 			int mmmousex,mmmousey;
@@ -947,12 +956,23 @@ int mainmenu_render()
 						SDL_RenderCopy(rend,no_tex2,NULL,&no);
 						int mousex, mousey;
 						int buttons = SDL_GetMouseState(&mousex, &mousey);
-						if(ev.key.keysym.scancode==SDL_SCANCODE_RETURN || buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+					
+						if(buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
 						{
 							evar=0;
 							game_sesh=0;
 							
 						}
+						if(ev.type==SDL_KEYDOWN)
+						{
+							if(ev.key.keysym.scancode==SDL_SCANCODE_RETURN and evar==2 and game_sesh==1)
+							{
+								evar=0;
+								game_sesh=0;
+								break;
+							}
+						}
+						
 					}
 					else SDL_RenderCopy(rend,no_tex,NULL,&no);
 				}
@@ -1204,7 +1224,7 @@ void highscore_render()
 				close=1;
 				break;
 			}
-			if(hevent.type==SDL_MOUSEBUTTONDOWN)
+			else if(hevent.type==SDL_MOUSEBUTTONDOWN)
 			{
 				if(hmousex>=back.x && hmousex<=(back.x+back.w) && hmousey>=back.y && hmousey<=(back.y+back.h))
 				{
@@ -1217,15 +1237,17 @@ void highscore_render()
 					break;		
 				}
 			}
-			if(hevent.key.keysym.scancode==SDL_SCANCODE_ESCAPE)
+			else if(hevent.type==SDL_KEYDOWN)
 			{
-				
+				if(hevent.key.keysym.scancode==SDL_SCANCODE_ESCAPE)
+				{
 					if(next_button==0) 
 					{
 						Hscore=0;
 					}
 					else next_button=0;
 					break;		
+				}
 				
 			}
 		}
@@ -1658,7 +1680,32 @@ void pause_menu_renderer()
 					pause=1-pause;
 					break;
 				}
-				if(pvar==0)
+				if(game_sesh)
+				{
+					if(evp.key.keysym.scancode==SDL_SCANCODE_ESCAPE)
+					{
+						if(game_sesh)
+						game_sesh=0;
+						
+					}
+
+					if(evp.key.keysym.scancode==SDL_SCANCODE_LEFT)
+					{
+						if(evar==2)
+						evar=1;
+						else if(evar==0) evar=1;
+						
+					}
+
+					if(evp.key.keysym.scancode==SDL_SCANCODE_RIGHT)
+					{
+						if(evar==1)
+						evar=2;
+						else if(evar==0) evar=1;
+						
+					}
+				}
+				else if(pvar==0)
 				{
 					if(evp.key.keysym.scancode==SDL_SCANCODE_LEFT or evp.key.keysym.scancode==SDL_SCANCODE_UP) pvar=1;
 					else if(evp.key.keysym.scancode==SDL_SCANCODE_RIGHT or evp.key.keysym.scancode==SDL_SCANCODE_DOWN) pvar=1;
@@ -1702,28 +1749,7 @@ void pause_menu_renderer()
 					break;
 				}
 			}
-			if(evp.key.keysym.scancode==SDL_SCANCODE_ESCAPE)
-			{
-				if(game_sesh)
-				game_sesh=0;
-				
-			}
-
-			if(evp.key.keysym.scancode==SDL_SCANCODE_LEFT)
-			{
-				if(evar==2)
-				evar=1;
-				else if(evar==0) evar=1;
-				
-			}
-
-			if(evp.key.keysym.scancode==SDL_SCANCODE_RIGHT)
-			{
-				if(evar==1)
-				evar=2;
-				else if(evar==0) evar=1;
-				
-			}
+			
 		}
 		int mmmousex,mmmousey;
 		int mmbuttons=SDL_GetMouseState(&mmmousex,&mmmousey);	
