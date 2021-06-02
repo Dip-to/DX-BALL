@@ -786,8 +786,19 @@ int mainmenu_render()
  					close = 1;
 					mainmenu=0;
 			}
+			
 			else if(ev.type==SDL_KEYDOWN)
 			{
+				
+				if(mainmenu==1 && game_sesh==0)
+				{
+					if(ev.key.keysym.scancode==SDL_SCANCODE_ESCAPE)
+					{
+						if(!game_sesh)
+						game_sesh=1;
+						break;
+					}
+				}
 
 				if(game_sesh==1)
 				{
@@ -811,6 +822,11 @@ int mainmenu_render()
 						if(evar==1)
 						evar=2;
 						else if(evar==0) evar=1;
+						break;
+					}
+					if(ev.key.keysym.scancode==SDL_SCANCODE_DOWN)
+					{
+					    if(evar==0) evar=1;
 						break;
 					}
 				}
@@ -865,9 +881,6 @@ int mainmenu_render()
 
 
 		
-			
-
-			
 		}
 			int mmmousex,mmmousey;
         	int mmbuttons=SDL_GetMouseState(&mmmousex,&mmmousey);	
@@ -1001,7 +1014,15 @@ void option_render()
 			}
 			else if(oevent.type==SDL_KEYDOWN)
 			{
-				if(ovar==0)
+				
+				if(oevent.key.keysym.scancode==SDL_SCANCODE_ESCAPE)
+				{
+					if(option)
+					option=0;
+					break;
+				}
+				
+				else if(ovar==0)
 				{
 					if(oevent.key.keysym.scancode==SDL_SCANCODE_LEFT or oevent.key.keysym.scancode==SDL_SCANCODE_UP) ovar=1;
 					else if(oevent.key.keysym.scancode==SDL_SCANCODE_RIGHT or oevent.key.keysym.scancode==SDL_SCANCODE_DOWN) ovar=1;
@@ -1046,7 +1067,7 @@ void option_render()
 				}
 			}
 		}
-	   
+		
 			back.x=1300;
 			back.y=900;
 			back.w=500;
@@ -1226,7 +1247,17 @@ void highscore_render()
 			}
 			else if(hevent.type==SDL_MOUSEBUTTONDOWN)
 			{
-				if(hmousex>=back.x && hmousex<=(back.x+back.w) && hmousey>=back.y && hmousey<=(back.y+back.h))
+
+				if(Hscore==1)
+				{
+					if(hevent.key.keysym.scancode==SDL_SCANCODE_ESCAPE)
+					{
+						if(Hscore)
+						Hscore=0;
+						break;
+					}
+				}
+				else if(hmousex>=back.x && hmousex<=(back.x+back.w) && hmousey>=back.y && hmousey<=(back.y+back.h))
 				{
 					printf("%d\n",next_button);
 					if(next_button==0) 
@@ -1403,6 +1434,16 @@ void help_render()
 			}
 			else if(heevent.type==SDL_KEYDOWN)
 			{
+
+				if(Help==1 and !Instruction and !Controls and !Powerup_info)
+				{
+					if(heevent.key.keysym.scancode==SDL_SCANCODE_ESCAPE)
+					{
+						if(Help)
+						Help=0;
+						break;
+					}
+				}
 				if(hvar==0)
 				{
 					if(heevent.key.keysym.scancode==SDL_SCANCODE_LEFT or heevent.key.keysym.scancode==SDL_SCANCODE_UP) hvar=1;
@@ -1703,6 +1744,11 @@ void pause_menu_renderer()
 						evar=2;
 						else if(evar==0) evar=1;
 						
+					}
+					if(evp.key.keysym.scancode==SDL_SCANCODE_DOWN)
+					{
+					    if(evar==0) evar=1;
+						break;
 					}
 				}
 				else if(pvar==0)
