@@ -1486,6 +1486,7 @@ void help_render()
 					if(Instruction2)
 					{
 						Instruction2=0;
+						Powerup_info=0;
 						break;
 					}
 					else if(Instruction)

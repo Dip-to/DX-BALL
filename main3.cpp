@@ -71,8 +71,8 @@ int main(int agr, char* args[])
  		while(SDL_PollEvent(&event))
 		{
  			int buttons = SDL_GetGlobalMouseState(&mousex, &mousey);
-			if(prevx>mousex) x_pos=max(0,x_pos-(SCROLL_SPEED/30));
-			else if(prevx<mousex) x_pos = min(WINDOW_WIDTH-bar.w,x_pos+(SCROLL_SPEED/30));
+			if(prevx>mousex) x_pos=max(0,x_pos-(SCROLL_SPEED/25));
+			else if(prevx<mousex) x_pos = min(WINDOW_WIDTH-bar.w,x_pos+(SCROLL_SPEED/25));
 			prevx=mousex;
 			prevy=mousey;
  			switch(event.type)
