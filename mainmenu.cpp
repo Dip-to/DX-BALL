@@ -808,7 +808,7 @@ int mainmenu_render()
 					else if(ev.key.keysym.scancode==SDL_SCANCODE_DOWN) uivar=4;
 					break;
 				}
-				if(uivar==3)
+				else if(uivar==3)
 				{
 					if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT);
 					else if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT) uivar=4;
@@ -816,7 +816,7 @@ int mainmenu_render()
 					else if(ev.key.keysym.scancode==SDL_SCANCODE_UP) uivar=1;
 					break;
 				}
-				if(uivar==4)
+				else if(uivar==4)
 				{
 					if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT);
 					else if(ev.key.keysym.scancode==SDL_SCANCODE_UP) uivar=2;
@@ -824,14 +824,41 @@ int mainmenu_render()
 					else if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT) uivar=3;
 					break;
 				}
-				if(uivar==5)
+				else if(uivar==5)
 				{
 					if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT or ev.key.keysym.scancode==SDL_SCANCODE_DOWN);
 					else if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT);
 					else if(ev.key.keysym.scancode==SDL_SCANCODE_UP) uivar=3;
 					break;
 				}
+
+				
 			}
+
+
+			if(ev.key.keysym.scancode==SDL_SCANCODE_ESCAPE)
+			{
+				if(game_sesh)
+				game_sesh=0;
+				
+			}
+
+			if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT)
+			{
+				if(evar==2)
+				evar=1;
+				else if(evar==0) evar=1;
+				
+			}
+
+			if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT)
+			{
+				if(evar==1)
+				evar=2;
+				else if(evar==0) evar=1;
+				
+			}
+			
 		}
 			int mmmousex,mmmousey;
         	int mmbuttons=SDL_GetMouseState(&mmmousex,&mmmousey);	
@@ -897,19 +924,16 @@ int mainmenu_render()
 				if(game_sesh)
 				{
 
-					evar=0;
-					if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT) evar=1;
-					else if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT) evar=2;
+					
 					SDL_RenderCopy(rend,exit_back_tex,NULL,&exit_back);
 					SDL_RenderCopy(rend,r_u_sure_tex,NULL,&r_u_sure);
-					SDL_RenderCopy(rend,no_tex,NULL,&no);
 					if(evar==1 || mmmousex>=yes.x && mmmousex<=(yes.x+yes.w) && mmmousey>=yes.y && mmmousey<=(yes.y+yes.h))
 					{
 						evar=1;
 						SDL_RenderCopy(rend,yes_tex2,NULL,&yes);
 						int mousex, mousey;
 						int buttons = SDL_GetMouseState(&mousex, &mousey);
-						if(ev.key.keysym.scancode==SDL_SCANCODE_LEFT || (buttons && SDL_BUTTON(SDL_BUTTON_LEFT)))
+						if(ev.key.keysym.scancode==SDL_SCANCODE_RETURN || buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
 						{
 							close=1;
 							evar=0;
@@ -923,10 +947,11 @@ int mainmenu_render()
 						SDL_RenderCopy(rend,no_tex2,NULL,&no);
 						int mousex, mousey;
 						int buttons = SDL_GetMouseState(&mousex, &mousey);
-						if(ev.key.keysym.scancode==SDL_SCANCODE_RIGHT || (buttons && SDL_BUTTON(SDL_BUTTON_LEFT)))
+						if(ev.key.keysym.scancode==SDL_SCANCODE_RETURN || buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
 						{
-							game_sesh=0;
 							evar=0;
+							game_sesh=0;
+							
 						}
 					}
 					else SDL_RenderCopy(rend,no_tex,NULL,&no);
@@ -1677,6 +1702,28 @@ void pause_menu_renderer()
 					break;
 				}
 			}
+			if(evp.key.keysym.scancode==SDL_SCANCODE_ESCAPE)
+			{
+				if(game_sesh)
+				game_sesh=0;
+				
+			}
+
+			if(evp.key.keysym.scancode==SDL_SCANCODE_LEFT)
+			{
+				if(evar==2)
+				evar=1;
+				else if(evar==0) evar=1;
+				
+			}
+
+			if(evp.key.keysym.scancode==SDL_SCANCODE_RIGHT)
+			{
+				if(evar==1)
+				evar=2;
+				else if(evar==0) evar=1;
+				
+			}
 		}
 		int mmmousex,mmmousey;
 		int mmbuttons=SDL_GetMouseState(&mmmousex,&mmmousey);	
@@ -1743,25 +1790,29 @@ void pause_menu_renderer()
 			SDL_RenderCopy(rend,exit_back_tex,NULL,&exit_back);
 			SDL_RenderCopy(rend,r_u_sure_tex,NULL,&r_u_sure);
 			SDL_RenderCopy(rend,no_tex,NULL,&no);
-			if(mmmousex>=yes.x && mmmousex<=(yes.x+yes.w) && mmmousey>=yes.y && mmmousey<=(yes.y+yes.h))
+			if(evar==1 || mmmousex>=yes.x && mmmousex<=(yes.x+yes.w) && mmmousey>=yes.y && mmmousey<=(yes.y+yes.h))
 			{
+				evar=1;
 				SDL_RenderCopy(rend,yes_tex2,NULL,&yes);
 				int mousex, mousey;
 				int buttons = SDL_GetMouseState(&mousex, &mousey);
-				if(buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+				if(evp.key.keysym.scancode==SDL_SCANCODE_RETURN ||buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
 				{
+					evar=0;
 					close=1;
 					return ;
 				}
 			}
 			else SDL_RenderCopy(rend,yes_tex,NULL,&yes);
-			if(mmmousex>=no.x && mmmousex<=(no.x+no.w) && mmmousey>=no.y && mmmousey<=(no.y+no.h))
+			if(evar==2 || mmmousex>=no.x && mmmousex<=(no.x+no.w) && mmmousey>=no.y && mmmousey<=(no.y+no.h))
 			{
+				evar=2;
 				SDL_RenderCopy(rend,no_tex2,NULL,&no);
 				int mousex, mousey;
 				int buttons = SDL_GetMouseState(&mousex, &mousey);
-				if(buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
+				if(evp.key.keysym.scancode==SDL_SCANCODE_RETURN ||buttons & SDL_BUTTON(SDL_BUTTON_LEFT))
 				{
+					evar=0;
 					game_sesh=0;
 				}
 			}
