@@ -1248,16 +1248,7 @@ void highscore_render()
 			else if(hevent.type==SDL_MOUSEBUTTONDOWN)
 			{
 
-				if(Hscore==1)
-				{
-					if(hevent.key.keysym.scancode==SDL_SCANCODE_ESCAPE)
-					{
-						if(Hscore)
-						Hscore=0;
-						break;
-					}
-				}
-				else if(hmousex>=back.x && hmousex<=(back.x+back.w) && hmousey>=back.y && hmousey<=(back.y+back.h))
+				if(hmousex>=back.x && hmousex<=(back.x+back.w) && hmousey>=back.y && hmousey<=(back.y+back.h))
 				{
 					printf("%d\n",next_button);
 					if(next_button==0) 
