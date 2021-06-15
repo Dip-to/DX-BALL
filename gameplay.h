@@ -5,7 +5,7 @@
 
 
 //game var
-extern int close,score,pause,gameover ,mainmenu,first_move,firehoise,first_bounce, bar_anim; //gameoverflag;
+extern int close,score,pause,gameover ,mainmenu,first_move,firehoise,first_bounce, bar_anim,fire_left; //gameoverflag;
 extern int mbar,gbar,fbar,mfbar; //bar anim
 extern float rect_x,pup_x, rect_y,pup_y, x_pos;
 //gameplay

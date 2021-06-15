@@ -688,13 +688,13 @@ int levelup_bricks_initialization(int level)
 				bricks[cnt].y=sumy;
 				cnt++;
 			}
-				sumx+=100;
-				if(sumx>=1800)
-				{
-					sumx=0;
-					sumy+=35;
-					
-				}
+			sumx+=100;
+			if(sumx>=1800)
+			{
+				sumx=0;
+				sumy+=35;
+				
+			}
 			
 		}
 	}
@@ -708,28 +708,30 @@ void reset_game(int flag)
 		gameover = 0;
 		ball_move=0;
 		first_bounce=0;
-		bar.w=200;
 		pspeed=1.0;
-		bar.x = (int) (WINDOW_WIDTH-bar.w)/2;
-		bar.y = (int) WINDOW_HEIGHT - (WINDOW_HEIGHT*0.05);
-		ball.x = (int) bar.x+50;
-		ball.y = (int) WINDOW_HEIGHT - (WINDOW_HEIGHT*0.05)+ball.h;
 		rect_x =  ball.x;
 		rect_y =  ball.y;
 		x_pos=bar.x;
 		x_vel = BALL_SPEED;
 		y_vel = BALL_SPEED*-1;
-		gbar=mfbar=fbar=0;
-		mbar=1;
 		mainmenu=1;
 		music_run=1;
 
 		
-
-		for(int i=0; i<50; i++)
+		if(flag!=2)
 		{
-			fire_rectarray1[i].show=fire_rectarray2[i].show=0;
-			if(i<9) power_up_map[i].type=0;
+			for(int i=0; i<50; i++)
+			{
+				fire_rectarray1[i].show=fire_rectarray2[i].show=0;
+				if(i<9) power_up_map[i].type=0;
+			}
+			bar.w=200;
+			bar.x = (int) (WINDOW_WIDTH-bar.w)/2;
+			bar.y = (int) WINDOW_HEIGHT - (WINDOW_HEIGHT*0.05);
+			ball.x = (int) bar.x+50;
+			ball.y = (int) WINDOW_HEIGHT - (WINDOW_HEIGHT*0.05)+ball.h;
+			gbar=mfbar=fbar=0;
+			mbar=1;
 		}
 
 		if(flag==1) //1 means mainmenut
@@ -793,7 +795,7 @@ void lbutton()
 		dx=BALL_SPEED*sin(theta*acos(-1)/180),dy=BALL_SPEED*cos(theta*acos(-1)/180);
 	}
 	else ball_move=1;
-	if((mfbar or fbar) and ball_move)
+	if((mfbar or fbar) and ball_move and fire_left>0)
 	{
 		if(gamesound==1)
 		Mix_PlayChannel(-1,fire_init,0);
@@ -808,6 +810,21 @@ void lbutton()
 		fire_rectarray1[fire_count].show=1;
 		fire_rectarray2[fire_count].show=1;
 		fire_count++;
+		fire_left--;
+		if(fire_left<=0)
+		{
+			power_up_map[0].type = 0;
+			if(mfbar)
+			{
+				mfbar=0;
+				mbar=1;
+			}
+			else if(fbar)
+			{
+				fbar=0;
+				gbar=1;
+			}
+		}
 		if(fire_count>=50) fire_count=0;
 	}
 }

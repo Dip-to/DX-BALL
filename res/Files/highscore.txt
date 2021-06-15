@@ -2,9 +2,11 @@
 1185 sfsg
 985 kaizer
 635 Lina
+175 empty
 70 ffsf
 50 empty
 50 dfad
+50 empty
 45 vsfg
 45 gfh
 40 asldk4
@@ -16,5 +18,3 @@
 20 empty
 20 adada
 20 fdfd
-15 empty
-0 empty

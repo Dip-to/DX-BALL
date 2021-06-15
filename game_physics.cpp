@@ -67,9 +67,9 @@ void score_and_life_print(int score, int life)
 }
 void firerender(int fbar)
 {
-	if (fbar == 1)
+	if (fbar == 1 and fire_left>0)
 	{
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < 50 ; i++)
 		{
 			if (fire_rectarray1[i].show or fire_rectarray2[i].show)
 			{
@@ -572,6 +572,7 @@ void powerup_achieve()
 		if (gamesound == 1)
 			Mix_PlayChannel(-1, life_laser_grab_music, 0);
 		score += 5;
+		fire_left+=25;
 		power_up_map[power_up.type].type = 1;
 		if (mbar == 1 or mfbar == 1) //fire
 		{
@@ -897,7 +898,7 @@ void game_physics()
 					if (gamesound == 1)
 						Mix_PlayChannel(-1, powerup_init_music, 0);
 					srand(time(0));
-					power_up.type = rand() % 9;
+					power_up.type = rand()%9;
 					if (power_up.type == 8 and fspeed)
 						power_up.type = 6;
 					else if (power_up.type == 7 and sspeed)
@@ -941,7 +942,7 @@ void game_physics()
 					if (gamesound == 1)
 						Mix_PlayChannel(-1, powerup_init_music, 0);
 					srand(time(0));
-					power_up.type = rand() % 9;
+					power_up.type = rand()%9;
 					if (power_up.type == 8 and fspeed)
 						power_up.type = 6;
 					else if (power_up.type == 7 and sspeed)
@@ -986,7 +987,7 @@ void game_physics()
 					if (gamesound == 1)
 						Mix_PlayChannel(-1, powerup_init_music, 0);
 					srand(time(0));
-					power_up.type = rand() % 9;
+					power_up.type = rand()%9;
 					if (power_up.type == 8 and fspeed)
 						power_up.type = 6;
 					else if (power_up.type == 7 and sspeed)
@@ -1030,7 +1031,7 @@ void game_physics()
 					if (gamesound == 1)
 						Mix_PlayChannel(-1, powerup_init_music, 0);
 					srand(time(0));
-					power_up.type = rand() % 9;
+					power_up.type = rand()%9;
 					if (power_up.type == 8 and fspeed)
 						power_up.type = 6;
 					else if (power_up.type == 7 and sspeed)
@@ -1082,7 +1083,7 @@ void game_physics()
 								if (gamesound == 1)
 									Mix_PlayChannel(-1, powerup_init_music, 0);
 								srand(time(0));
-								power_up.type = rand() % 9;
+								power_up.type = rand()%9;
 								if (power_up.type == 8 and fspeed)
 									power_up.type = 6;
 								else if (power_up.type == 7 and sspeed)
@@ -1128,7 +1129,7 @@ void game_physics()
 								if (gamesound == 1)
 									Mix_PlayChannel(-1, powerup_init_music, 0);
 								srand(time(0));
-								power_up.type = rand() % 9;
+								power_up.type = rand()%9;
 								if (power_up.type == 8 and fspeed)
 									power_up.type = 6;
 								else if (power_up.type == 7 and sspeed)

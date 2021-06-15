@@ -4,6 +4,7 @@
 float x_vel = BALL_SPEED;
 float y_vel = BALL_SPEED;
 int ball_move = 0, bricks_showed = 126;
+int fire_left=0;
 
 int bar_anim = 0;
 double dx = 0, dy = 0; //ball speed direction
