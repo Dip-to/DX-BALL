@@ -567,6 +567,14 @@ int bar_and_bricks_render(int cnt, int l)
 				{
 					SDL_RenderCopy(rend, bricks37_1, NULL, &br);
 				}	
+				else if (bricks[i].b21)
+				{
+					SDL_RenderCopy(rend, bricks21, NULL, &br);
+				}
+				else if (bricks[i].b21_1)
+				{
+					SDL_RenderCopy(rend, bricks21_1, NULL, &br);
+				}
 				else if (bricks[i].b1)
 				{
 					SDL_RenderCopy(rend, bricks1, NULL, &br);
@@ -955,8 +963,8 @@ void game_physics()
 					}
 					else if(level==3)
 					{
-						bricks[i].b37=false;
-						bricks[i].b37_1=true;
+						if(bricks[i].b21) bricks[i].b21_1 = true,bricks[i].b21 = false;
+						if(bricks[i].b37) bricks[i].b37=false,bricks[i].b37_1=true;
 					}
 					bricks_showed++;
 				}
@@ -1008,8 +1016,8 @@ void game_physics()
 					}
 					else if(level==3)
 					{
-						bricks[i].b37=false;
-						bricks[i].b37_1=true;
+						if(bricks[i].b21) bricks[i].b21_1 = true,bricks[i].b21 = false;
+						if(bricks[i].b37) bricks[i].b37=false,bricks[i].b37_1=true;
 						
 					}
 					bricks_showed++;
@@ -1060,8 +1068,8 @@ void game_physics()
 					}
 					else if(level==3)
 					{
-						bricks[i].b37=false;
-						bricks[i].b37_1=true;
+						if(bricks[i].b21) bricks[i].b21_1 = true,bricks[i].b21 = false;
+						if(bricks[i].b37) bricks[i].b37=false,bricks[i].b37_1=true;
 						
 					}
 					bricks_showed++;
@@ -1115,8 +1123,8 @@ void game_physics()
 					}
 					else if(level==3)
 					{
-						bricks[i].b37=false;
-						bricks[i].b37_1=true;
+						if(bricks[i].b21) bricks[i].b21_1 = true,bricks[i].b21 = false;
+						if(bricks[i].b37) bricks[i].b37=false,bricks[i].b37_1=true;
 						
 					}
 					bricks_showed++;
@@ -1177,8 +1185,8 @@ void game_physics()
 								}
 								else if(level==3)
 								{
-									bricks[i].b37=false;
-									bricks[i].b37_1=true;
+									if(bricks[i].b21) bricks[i].b21_1 = true,bricks[i].b21 = false;
+									if(bricks[i].b37) bricks[i].b37=false,bricks[i].b37_1=true;
 									
 								}
 								bricks_showed++;
@@ -1232,8 +1240,8 @@ void game_physics()
 								}
 								else if(level==3)
 								{
-									bricks[i].b37=false;
-									bricks[i].b37_1=true;
+									if(bricks[i].b21) bricks[i].b21_1 = true,bricks[i].b21 = false;
+									if(bricks[i].b37) bricks[i].b37=false,bricks[i].b37_1=true;
 									
 								}
 								bricks_showed++;

@@ -682,6 +682,7 @@ int levelup_bricks_initialization(int level)
 				else if(bricks_type==35) bricks[cnt].b35=true;
 				else if(bricks_type==36) bricks[cnt].b36=true;
 				else if(bricks_type==37) bricks[cnt].b37=true,bricks[cnt].power=1;
+				else if(bricks_type==21) bricks[cnt].b21=true,bricks[cnt].power=1;
 				else if(bricks_type==1) bricks[cnt].b1=true;
 				else if(bricks_type==2) bricks[cnt].b2=true;
 				else if(bricks_type==3) bricks[cnt].b3=true;

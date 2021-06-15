@@ -30,11 +30,6 @@ extern SDL_Texture* background1,*background2,*background3,*level1_back,*level2_b
 extern int close,score,pause,gameover ,mainmenu,first_move,firehoise,first_bounce, bar_anim,fire_left; //gameoverflag;
 extern int mbar,gbar,fbar,mfbar; //bar anim
 extern float rect_x,pup_x, rect_y,pup_y, x_pos;
-//gameplay
-extern double dx,dy,BALL_SPEED,theta; //ball speed direction
-extern float pspeed,x_vel, y_vel;
-extern int life,level,fspeed,sspeed,epaddle,spaddle,totalbricks,ball_move,bricks_showed;
-//gameplay
 
 
 

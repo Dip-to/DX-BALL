@@ -2,6 +2,7 @@
 1820 gfh
 1625 empty
 1620 Dipto
+1560 dfad
 1480 ghghj
 1300 vsfg
 1185 sfsg
@@ -17,4 +18,3 @@
 85 gdh
 70 ffsf
 50 empty
-50 dfad
