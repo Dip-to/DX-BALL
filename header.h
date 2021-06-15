@@ -13,6 +13,8 @@
 #include "utils.h"
 #include "sound.h"
 #include "gameplay.h"
+#include "pre_declare.h"
+#include "Struct.h"
 #include <math.h>
 
 #endif
