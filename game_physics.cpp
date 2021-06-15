@@ -898,7 +898,7 @@ void game_physics()
 					if (gamesound == 1)
 						Mix_PlayChannel(-1, powerup_init_music, 0);
 					srand(time(0));
-					power_up.type = rand()%9;
+					power_up.type = 0;
 					if (power_up.type == 8 and fspeed)
 						power_up.type = 6;
 					else if (power_up.type == 7 and sspeed)
@@ -942,7 +942,7 @@ void game_physics()
 					if (gamesound == 1)
 						Mix_PlayChannel(-1, powerup_init_music, 0);
 					srand(time(0));
-					power_up.type = rand()%9;
+					power_up.type = 0;
 					if (power_up.type == 8 and fspeed)
 						power_up.type = 6;
 					else if (power_up.type == 7 and sspeed)
@@ -987,7 +987,7 @@ void game_physics()
 					if (gamesound == 1)
 						Mix_PlayChannel(-1, powerup_init_music, 0);
 					srand(time(0));
-					power_up.type = rand()%9;
+					power_up.type = 0;
 					if (power_up.type == 8 and fspeed)
 						power_up.type = 6;
 					else if (power_up.type == 7 and sspeed)
@@ -1031,7 +1031,7 @@ void game_physics()
 					if (gamesound == 1)
 						Mix_PlayChannel(-1, powerup_init_music, 0);
 					srand(time(0));
-					power_up.type = rand()%9;
+					power_up.type = 0;
 					if (power_up.type == 8 and fspeed)
 						power_up.type = 6;
 					else if (power_up.type == 7 and sspeed)
@@ -1083,7 +1083,7 @@ void game_physics()
 								if (gamesound == 1)
 									Mix_PlayChannel(-1, powerup_init_music, 0);
 								srand(time(0));
-								power_up.type = rand()%9;
+								power_up.type = 0;
 								if (power_up.type == 8 and fspeed)
 									power_up.type = 6;
 								else if (power_up.type == 7 and sspeed)
@@ -1129,7 +1129,7 @@ void game_physics()
 								if (gamesound == 1)
 									Mix_PlayChannel(-1, powerup_init_music, 0);
 								srand(time(0));
-								power_up.type = rand()%9;
+								power_up.type = 0;
 								if (power_up.type == 8 and fspeed)
 									power_up.type = 6;
 								else if (power_up.type == 7 and sspeed)
