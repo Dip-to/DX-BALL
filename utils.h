@@ -7,11 +7,11 @@
 #define WINDOW_HEIGHT (980)
 #define SCROLL_SPEED (900)
 #define POWERUP_SPEED (0)
-// #define max(a,b) (a>b)?a:b
-// #define min(a,b) (a<b)?a:b
+#define max(a,b) (a>b)?a:b
+#define min(a,b) (a<b)?a:b
 #define abs(a) (a>=0)?a:-a
-float min(float x, float y);
-float max(float x, float y);
+// float min(float x, float y);
+// float max(float x, float y);
 
 
 

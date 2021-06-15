@@ -1,15 +1,15 @@
 #include "header.h"
 
-float min(float x, float y)
-{
-	if(x<y) return x;
-	return y;
-}
-float max(float x, float y)
-{
-	if(x>y) return x;
-	return y;
-}
+// float min(float x, float y)
+// {
+// 	if(x<y) return x;
+// 	return y;
+// }
+// float max(float x, float y)
+// {
+// 	if(x>y) return x;
+// 	return y;
+// }
 
 int gameover_page=0,fire_count=0;
 SDL_Texture* convert=NULL;
