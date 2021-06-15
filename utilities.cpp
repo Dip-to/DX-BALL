@@ -610,6 +610,7 @@ int levelup_bricks_initialization(int level)
 		bricks[cnt].b34=true;
 		bricks[cnt].b35=true;
 		bricks[cnt].b36=true;
+		bricks[cnt].b37=true;
 		bricks[i].power=0;
 
 	}
@@ -680,6 +681,7 @@ int levelup_bricks_initialization(int level)
 				else if(bricks_type==34) bricks[cnt].b34=true;
 				else if(bricks_type==35) bricks[cnt].b35=true;
 				else if(bricks_type==36) bricks[cnt].b36=true;
+				else if(bricks_type==37) bricks[cnt].b37=true,bricks[cnt].power=1;
 				else if(bricks_type==1) bricks[cnt].b1=true;
 				else if(bricks_type==2) bricks[cnt].b2=true;
 				else if(bricks_type==3) bricks[cnt].b3=true;
@@ -738,7 +740,7 @@ void reset_game(int flag)
 			mainmenu=0;
 			life=3;
 			level=1;
-		
+
 		}
 		else if(flag==2) //2 means bricks zero or level up reeset
 		{
@@ -750,6 +752,7 @@ void reset_game(int flag)
 			dx=BALL_SPEED*sin(theta*acos(-1)/180);
 			dy=BALL_SPEED*cos(theta*acos(-1)/180);
 			mainmenu=0;
+			power_up.hoise=0;
 		}
 		else if(flag==3)
 		{
@@ -811,6 +814,10 @@ void lbutton()
 		fire_left--;
 		if(fire_left<=0)
 		{
+			for(int i=0; i<50; i++)
+			{
+				fire_rectarray1[i].show=fire_rectarray2[i].show=0;
+			}
 			power_up_map[0].type = 0;
 			if(mfbar)
 			{

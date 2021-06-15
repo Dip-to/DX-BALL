@@ -1,5 +1,11 @@
+1820 asldk4
+1820 gfh
+1625 empty
 1620 Dipto
+1480 ghghj
+1300 vsfg
 1185 sfsg
+1160 dfdf
 985 kaizer
 635 Lina
 635 adada
@@ -12,9 +18,3 @@
 70 ffsf
 50 empty
 50 dfad
-50 empty
-45 vsfg
-45 gfh
-40 asldk4
-40 dfdf
-35 ghghj

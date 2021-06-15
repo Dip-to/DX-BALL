@@ -4,7 +4,7 @@
 float x_vel = BALL_SPEED;
 float y_vel = BALL_SPEED;
 int ball_move = 0, bricks_showed = 126;
-int fire_left=0;
+
 
 int bar_anim = 0;
 double dx = 0, dy = 0; //ball speed direction
@@ -107,6 +107,7 @@ int main(int agr, char *args[])
 				case SDL_SCANCODE_2:
 					fbar = 1;
 					gbar = mbar = mfbar = 0;
+					fire_left+=40;
 					break;
 				case SDL_SCANCODE_3:
 					mbar = 1;

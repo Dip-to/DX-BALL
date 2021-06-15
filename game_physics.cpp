@@ -3,6 +3,7 @@
 float pupx_vel = 0;
 float pupy_vel = 0;
 int var = 0;
+int fire_left=0;
 
 SDL_Rect powerup_gameplay_rect;
 SDL_Texture *score_ttf_tex = NULL;
@@ -25,6 +26,9 @@ SDL_Texture *bricks33 = NULL;
 SDL_Texture *bricks34 = NULL;
 SDL_Texture *bricks35 = NULL;
 SDL_Texture *bricks36 = NULL;
+SDL_Texture* bricks37=NULL;
+SDL_Texture* bricks37_1=NULL;
+
 
 void score_and_life_print(int score, int life)
 {
@@ -302,6 +306,19 @@ void bricks_and_bar_load()
 	bricks36 = SDL_CreateTextureFromSurface(rend, bricks_surface);
 	SDL_FreeSurface(bricks_surface);
 
+	bricks_surface=IMG_Load("res/Bricks/tile37.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks37 load Surface Error: %s\n",IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return ;
+	}
+	bricks37_1=SDL_CreateTextureFromSurface(rend,bricks_surface);
+	bricks37=NULL;
+	SDL_FreeSurface(bricks_surface);
+
 	//fire load
 	tmp1 = IMG_Load("res/fire.jpg");
 	if (!tmp1)
@@ -542,6 +559,14 @@ int bar_and_bricks_render(int cnt, int l)
 				{
 					SDL_RenderCopy(rend, bricks36, NULL, &br);
 				}
+				else if(bricks[i].b37)
+				{
+					SDL_RenderCopy(rend, NULL, NULL, &br);
+				}	
+				else if(bricks[i].b37_1)
+				{
+					SDL_RenderCopy(rend, bricks37_1, NULL, &br);
+				}	
 				else if (bricks[i].b1)
 				{
 					SDL_RenderCopy(rend, bricks1, NULL, &br);
@@ -572,7 +597,7 @@ void powerup_achieve()
 		if (gamesound == 1)
 			Mix_PlayChannel(-1, life_laser_grab_music, 0);
 		score += 5;
-		fire_left+=25;
+		fire_left+=40;
 		power_up_map[power_up.type].type = 1;
 		if (mbar == 1 or mfbar == 1) //fire
 		{
@@ -898,7 +923,7 @@ void game_physics()
 					if (gamesound == 1)
 						Mix_PlayChannel(-1, powerup_init_music, 0);
 					srand(time(0));
-					power_up.type = 0;
+					power_up.type = rand()%9;
 					if (power_up.type == 8 and fspeed)
 						power_up.type = 6;
 					else if (power_up.type == 7 and sspeed)
@@ -923,8 +948,16 @@ void game_physics()
 						Mix_PlayChannel(-1, hardbricks, 0);
 					bricks[i].power--;
 					bricks[i].show = true;
-					bricks[i].b21_1 = true;
-					bricks[i].b21 = false;
+					if(level==2)
+					{
+						bricks[i].b21_1 = true;
+						bricks[i].b21 = false;
+					}
+					else if(level==3)
+					{
+						bricks[i].b37=false;
+						bricks[i].b37_1=true;
+					}
 					bricks_showed++;
 				}
 				else
@@ -942,7 +975,7 @@ void game_physics()
 					if (gamesound == 1)
 						Mix_PlayChannel(-1, powerup_init_music, 0);
 					srand(time(0));
-					power_up.type = 0;
+					power_up.type = rand()%9;
 					if (power_up.type == 8 and fspeed)
 						power_up.type = 6;
 					else if (power_up.type == 7 and sspeed)
@@ -968,8 +1001,17 @@ void game_physics()
 						Mix_PlayChannel(-1, hardbricks, 0);
 					bricks[i].power--;
 					bricks[i].show = true;
-					bricks[i].b21_1 = true;
-					bricks[i].b21 = false;
+					if(level==2)
+					{
+						bricks[i].b21_1 = true;
+						bricks[i].b21 = false;
+					}
+					else if(level==3)
+					{
+						bricks[i].b37=false;
+						bricks[i].b37_1=true;
+						
+					}
 					bricks_showed++;
 				}
 				else
@@ -987,7 +1029,7 @@ void game_physics()
 					if (gamesound == 1)
 						Mix_PlayChannel(-1, powerup_init_music, 0);
 					srand(time(0));
-					power_up.type = 0;
+					power_up.type = rand()%9;
 					if (power_up.type == 8 and fspeed)
 						power_up.type = 6;
 					else if (power_up.type == 7 and sspeed)
@@ -1011,8 +1053,17 @@ void game_physics()
 						Mix_PlayChannel(-1, hardbricks, 0);
 					bricks[i].power--;
 					bricks[i].show = true;
-					bricks[i].b21_1 = true;
-					bricks[i].b21 = false;
+					if(level==2)
+					{
+						bricks[i].b21_1 = true;
+						bricks[i].b21 = false;
+					}
+					else if(level==3)
+					{
+						bricks[i].b37=false;
+						bricks[i].b37_1=true;
+						
+					}
 					bricks_showed++;
 				}
 				else
@@ -1031,7 +1082,7 @@ void game_physics()
 					if (gamesound == 1)
 						Mix_PlayChannel(-1, powerup_init_music, 0);
 					srand(time(0));
-					power_up.type = 0;
+					power_up.type = rand()%9;
 					if (power_up.type == 8 and fspeed)
 						power_up.type = 6;
 					else if (power_up.type == 7 and sspeed)
@@ -1057,8 +1108,17 @@ void game_physics()
 						Mix_PlayChannel(-1, hardbricks, 0);
 					bricks[i].power--;
 					bricks[i].show = true;
-					bricks[i].b21_1 = true;
-					bricks[i].b21 = false;
+					if(level==2)
+					{
+						bricks[i].b21_1 = true;
+						bricks[i].b21 = false;
+					}
+					else if(level==3)
+					{
+						bricks[i].b37=false;
+						bricks[i].b37_1=true;
+						
+					}
 					bricks_showed++;
 				}
 				else
@@ -1083,7 +1143,7 @@ void game_physics()
 								if (gamesound == 1)
 									Mix_PlayChannel(-1, powerup_init_music, 0);
 								srand(time(0));
-								power_up.type = 0;
+								power_up.type = rand()%9;
 								if (power_up.type == 8 and fspeed)
 									power_up.type = 6;
 								else if (power_up.type == 7 and sspeed)
@@ -1110,8 +1170,17 @@ void game_physics()
 									Mix_PlayChannel(-1, hardbricks, 0);
 								bricks[i].power--;
 								bricks[i].show = true;
-								bricks[i].b21_1 = true;
-								bricks[i].b21 = false;
+								if(level==2)
+								{
+									bricks[i].b21_1 = true;
+									bricks[i].b21 = false;
+								}
+								else if(level==3)
+								{
+									bricks[i].b37=false;
+									bricks[i].b37_1=true;
+									
+								}
 								bricks_showed++;
 							}
 							else
@@ -1129,7 +1198,7 @@ void game_physics()
 								if (gamesound == 1)
 									Mix_PlayChannel(-1, powerup_init_music, 0);
 								srand(time(0));
-								power_up.type = 0;
+								power_up.type = rand()%9;
 								if (power_up.type == 8 and fspeed)
 									power_up.type = 6;
 								else if (power_up.type == 7 and sspeed)
@@ -1156,8 +1225,17 @@ void game_physics()
 									Mix_PlayChannel(-1, hardbricks, 0);
 								bricks[i].power--;
 								bricks[i].show = true;
-								bricks[i].b21_1 = true;
-								bricks[i].b21 = false;
+								if(level==2)
+								{
+									bricks[i].b21_1 = true;
+									bricks[i].b21 = false;
+								}
+								else if(level==3)
+								{
+									bricks[i].b37=false;
+									bricks[i].b37_1=true;
+									
+								}
 								bricks_showed++;
 							}
 							else
@@ -1230,12 +1308,18 @@ void level_destroy()
 	SDL_DestroyTexture(bricks3);
 	SDL_DestroyTexture(bricks4);
 	SDL_DestroyTexture(bricks5);
+	SDL_DestroyTexture(bricks21);
+	SDL_DestroyTexture(bricks21_1);
+	SDL_DestroyTexture(bricks25);
+	SDL_DestroyTexture(bricks26);
+	SDL_DestroyTexture(bricks27);
 	SDL_DestroyTexture(bricks31);
 	SDL_DestroyTexture(bricks32);
 	SDL_DestroyTexture(bricks33);
 	SDL_DestroyTexture(bricks34);
 	SDL_DestroyTexture(bricks35);
 	SDL_DestroyTexture(bricks36);
+	SDL_DestroyTexture(bricks37_1);
 	SDL_DestroyTexture(firetex);
 	SDL_DestroyTexture(score_ttf_tex);
 	bricks1 = NULL;

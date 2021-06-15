@@ -18,7 +18,7 @@
 struct bricksStruct
 {
 	int x,y,dx=100,dy=35,power=0;
-	bool powerup=false,show=false,r,g,b1=false,b2=false,b3=false,b4=false,b21=false,b25=false,b26=false,b27=false,b21_1,b31=false,b32=false,b33=false,b34=false,b35=false,b36=false;
+	bool powerup=false,show=false,r,g,b1=false,b2=false,b3=false,b4=false,b21=false,b25=false,b26=false,b27=false,b21_1,b31=false,b32=false,b33=false,b34=false,b35=false,b36=false,b37=false,b37_1=false;
 };
 struct texarray
 {
