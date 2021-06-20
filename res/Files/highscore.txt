@@ -1,11 +1,16 @@
+2280 pppp
+2025 empty
 1820 asldk4
 1820 gfh
 1775 Reyadath
+1630 empty
 1625 nope
 1620 Dipto
+1590 2
 1560 dfad
 1480 ghghj
 1300 vsfg
+1220 ok
 1185 sfsg
 1160 dfdf
 985 kaizer
@@ -13,8 +18,3 @@
 635 adada
 30 empty
 30 empty
-25 empty
-15 pppp
-0 empty
-0 empty
-0 empty
