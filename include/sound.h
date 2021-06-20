@@ -21,7 +21,7 @@ extern Mix_Chunk *score_double;
 extern Mix_Chunk *level_up;
 
 
-void music_load(); //utilities
+void music_load(); //data_load
 
 
 #endif
