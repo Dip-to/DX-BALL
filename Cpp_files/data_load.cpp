@@ -1,6 +1,55 @@
 #include "header.h"
 
 
+//
+float x_vel = BALL_SPEED;
+float y_vel = BALL_SPEED;
+int ball_move = 0, bricks_showed = 126;
+
+
+int bar_anim = 0;
+double dx = 0, dy = 0; //ball speed direction
+float pspeed = 1.0;
+int life = 3, level = 1, fspeed = 0, sspeed = 0, epaddle = 0, spaddle = 0;
+
+int mbar = 1, gbar = 0, fbar = 0, mfbar = 0;
+int gameover = 0, mainmenu = 1, first_move = 0, firehoise = 0, first_bounce = 0; //gameoverflag
+float rect_x, pup_x, rect_y, pup_y, x_pos;
+SDL_Rect background, level_background, ball, powerup_rec, bar;
+SDL_Texture *liferend = NULL;
+int close = 0, sound = 1, music_run = 1, gamesound = 1, score = 0, pause = 0;
+double BALL_SPEED = 20, theta = 30;
+int totalbricks = 126;
+pwrupvar power_up;
+firesrect fire_rectarray1[100], fire_rectarray2[100];
+frontball front[2];
+pwrupgplay power_up_map[9];
+texarray gbartex[4], fbartex[4], mbartex[4], mfbartex[4], poweruptex[9], powerup_blurtex[9];
+hscoresturct highscore_array[20];
+bricksStruct bricks[150];
+Uint32 render_flags;
+SDL_Renderer *rend = NULL;
+SDL_Window *win = NULL;
+SDL_Surface *surface = NULL;
+SDL_Texture *tex = NULL;
+SDL_Texture *tex2 = NULL;
+//kaj sesh
+
+Mix_Music *main_menu_music = NULL; //music
+Mix_Chunk *bar_paddle_collision = NULL;
+Mix_Chunk *ball_bricks_collision = NULL;
+Mix_Chunk *hardbricks = NULL;
+Mix_Chunk *fire_init = NULL;
+Mix_Chunk *game_over_music = NULL;
+Mix_Chunk *powerup_init_music = NULL;
+Mix_Chunk *expand_paddle_music = NULL;
+Mix_Chunk *shrink_paddle_music = NULL;
+Mix_Chunk *slow_ball_music = NULL;
+Mix_Chunk *fast_ball_music = NULL;
+Mix_Chunk *life_laser_grab_music = NULL;
+Mix_Chunk *score_double = NULL;
+Mix_Chunk *level_up = NULL;
+
 void music_load()
 {
 	main_menu_music = Mix_LoadMUS("res/Music/Ethno_Papa.mp3");
@@ -104,6 +153,123 @@ void music_load()
         return ;
     }
 	
+}
+
+int levelup_bricks_initialization(int level)
+{	
+	int cnt=0,bricks_type;
+	FILE *fptr;
+	for(int i=0; i<150; i++) 
+	{
+		bricks[i].show=false;
+		bricks[i].b1=false;
+		bricks[i].b2=false;
+		bricks[i].b3=false;
+		bricks[i].b4=false;
+		bricks[i].b21=false;
+		bricks[i].b25=false;
+		bricks[i].b27=false;
+		bricks[i].b26=false;
+		bricks[cnt].b31=true;
+		bricks[cnt].b32=true;
+		bricks[cnt].b33=true;
+		bricks[cnt].b34=true;
+		bricks[cnt].b35=true;
+		bricks[cnt].b36=true;
+		bricks[cnt].b37=true;
+		bricks[i].power=0;
+
+	}
+	if(level==1)
+	{
+		fptr=fopen("res/Level_layout/level1.txt","r");
+		int sumx=0,sumy=90;
+		for(int i=0; i<126; i++)
+		{
+			fscanf(fptr, "%d" ,&bricks_type);
+			bricks[cnt].show=true;
+			if(bricks_type==1) bricks[cnt].b1=true;
+			else if(bricks_type==2) bricks[cnt].b2=true;
+			else if(bricks_type==3) bricks[cnt].b3=true;
+			else if(bricks_type==4) bricks[cnt].b4=true;
+			bricks[cnt].x=sumx;
+			bricks[cnt].y=sumy;
+			cnt++;
+			sumx+=100;
+			if(sumx>=1800)
+			{
+				sumx=0;
+				sumy+=35;
+				
+			}
+		}
+	}
+	else if(level==2)
+	{
+		fptr=fopen("res/Level_layout/level2.txt","r");
+		int sumx=0,sumy=90;
+		for(int i=0; i<144; i++)
+		{
+			fscanf(fptr, "%d" ,&bricks_type);
+			if(bricks_type!=0)
+			{
+				if(bricks_type==21) bricks[cnt].b21=true,bricks[cnt].power=1;
+				else if(bricks_type==25) bricks[cnt].b25=true;
+				else if(bricks_type==26) bricks[cnt].b26=true;
+				else if(bricks_type==27) bricks[cnt].b27=true;
+				bricks[cnt].x=sumx;
+				bricks[cnt].y=sumy;
+				bricks[cnt].show=true;
+				cnt++;
+			}
+			sumx+=100;
+			if(sumx>=1800)
+			{
+				sumx=0;
+				sumy+=35;
+				
+			}
+		}
+	}
+	else if(level==3)
+	{
+		fptr=fopen("res/Level_layout/level3.txt","r");
+		int sumx=0,sumy=90;
+		for(int i=0; i<198; i++)
+		{
+			fscanf(fptr, "%d" ,&bricks_type);
+			if(bricks_type!=0)
+			{
+				bricks[cnt].show=true;
+				if(bricks_type==31) bricks[cnt].b31=true;
+				else if(bricks_type==32) bricks[cnt].b32=true;
+				else if(bricks_type==33) bricks[cnt].b33=true;
+				else if(bricks_type==34) bricks[cnt].b34=true;
+				else if(bricks_type==35) bricks[cnt].b35=true;
+				else if(bricks_type==36) bricks[cnt].b36=true;
+				else if(bricks_type==37) bricks[cnt].b37=true,bricks[cnt].power=1;
+				else if(bricks_type==21) bricks[cnt].b21=true,bricks[cnt].power=1;
+				else if(bricks_type==1) bricks[cnt].b1=true;
+				else if(bricks_type==2) bricks[cnt].b2=true;
+				else if(bricks_type==3) bricks[cnt].b3=true;
+				else if(bricks_type==4) bricks[cnt].b4=true;
+				bricks[cnt].x=sumx;
+				bricks[cnt].y=sumy;
+				cnt++;
+			}
+			sumx+=100;
+			if(sumx>=1800)
+			{
+				sumx=0;
+				sumy+=35;
+				
+			}
+			
+		}
+	}
+	fclose(fptr);
+	return cnt;
+
 }
 
 void ball_music_and_powerup_load()
