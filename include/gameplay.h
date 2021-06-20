@@ -7,6 +7,7 @@
 extern double dx,dy,BALL_SPEED,theta; //ball speed direction
 extern float pspeed,x_vel, y_vel;
 extern int life,level,fspeed,sspeed,epaddle,spaddle,totalbricks,ball_move,bricks_showed;
+extern int scr_in;
 //gameplay
 
 

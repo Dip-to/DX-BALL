@@ -849,6 +849,7 @@ void game_physics()
 		sspeed = 0;
 		theta = 30;
 		pspeed = 1.0;
+		scr_in=5;
 		dx = BALL_SPEED * sin(theta * acos(-1) / 180);
 		dy = BALL_SPEED * cos(theta * acos(-1) / 180);
 		first_move = 1;

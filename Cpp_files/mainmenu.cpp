@@ -1,6 +1,6 @@
 #include "header.h"
 
-int level2, level1, level3, enter = 0, uivar = 0, pvar = 0, ovar = 0, hvar = 0, povar = 0, covar = 0, ivar = 0, nvar = 0, evar = 0;
+int level2, level1, level3, enter = 0, uivar = 0, pvar = 0, ovar = 0, hvar = 0, povar = 0, covar = 0, ivar = 0, nvar = 0, evar = 0,scr_in=5;
 int Hscore = 0, Help = 0, Instruction = 0, Controls = 0, Powerup_info = 0, Instruction2 = 0, option = 0, game_sesh = 0, next_button = 0;
 //main menu
 SDL_Rect instruction, controls, powerup_info, high_up, high_body, next, control_body, powerup_info_body, instruction_body;

@@ -237,7 +237,6 @@ void name_write()
 	fptr_write=fopen("res/Files/name.txt","w");
 	while(hobe)
 	{
-		
 		SDL_Event ch;
 		while(SDL_PollEvent(&ch))
 		{
@@ -289,6 +288,27 @@ void name_write()
 			char tmpname[20];
 			fgets(tmpname,15,fptr_read);
 			int len=strlen(tmpname);
+			int zzz=0;
+			for(int bb=0; bb<len; bb++)
+			{
+				if(tmpname[bb]!=' ') 
+				{
+					zzz=1;
+					break;
+				}
+			}
+			if(!zzz)
+			{
+				puts("fdfdfdfdfdfdfdf");
+				tmpname[0]='U';
+				tmpname[1]='n';
+				tmpname[2]='k';
+				tmpname[3]='n';
+				tmpname[4]='o';
+				tmpname[5]='w';
+				tmpname[6]='n';
+				tmpname[7]='\0';
+			}
 			SDL_Rect print_rec;
 			print_rec.w=len*40;
 			print_rec.h=120;
@@ -708,6 +728,7 @@ int levelup_bricks_initialization(int level)
 
 void reset_game(int flag)
 {
+		scr_in=5;
 		gameover = 0;
 		ball_move=0;
 		first_bounce=0;
