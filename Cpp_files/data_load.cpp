@@ -1,16 +1,6 @@
 #include "header.h"
 
-TTF_Font *Name_and_Score = NULL;
-SDL_Texture* background1=NULL;
-SDL_Texture* background2=NULL;
-SDL_Texture* background3=NULL;
-SDL_Texture* level1_back=NULL;
-SDL_Texture* level2_back=NULL;
-SDL_Texture* level3_back=NULL;
-void font_closing()
-{
-	TTF_CloseFont(Name_and_Score);
-}
+
 void music_load()
 {
 	main_menu_music = Mix_LoadMUS("res/Music/Ethno_Papa.mp3");
