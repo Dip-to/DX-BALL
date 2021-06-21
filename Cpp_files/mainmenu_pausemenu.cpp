@@ -1864,6 +1864,7 @@ void pause_menu_renderer()
 			{
 				pvar = 0;
 				pause = 1 - pause;
+				level1=1;
 				reset_game(3);
 			}
 		}
