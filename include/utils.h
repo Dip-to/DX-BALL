@@ -3,6 +3,25 @@
 
 #include "header.h"
 
+//bricks tex
+extern SDL_Texture *bricks1 ;
+extern SDL_Texture *bricks2 ;
+extern SDL_Texture *bricks3 ;
+extern SDL_Texture *bricks4 ;
+extern SDL_Texture *bricks5 ;
+extern SDL_Texture *bricks21 ;
+extern SDL_Texture *bricks21_1 ;
+extern SDL_Texture *bricks25 ;
+extern SDL_Texture *bricks26 ;
+extern SDL_Texture *bricks27 ;
+extern SDL_Texture *bricks31 ;
+extern SDL_Texture *bricks32 ;
+extern SDL_Texture *bricks33 ;
+extern SDL_Texture *bricks34 ;
+extern SDL_Texture *bricks35 ;
+extern SDL_Texture *bricks36 ;
+extern SDL_Texture* bricks37;
+extern SDL_Texture* bricks37_1;
 
 int INITIALIZE(); //utilities
 void mainmenu_load(); //mainmenu

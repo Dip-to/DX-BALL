@@ -511,3 +511,5 @@ void pause_menu_renderer()
 		SDL_RenderPresent(rend);
 	}
 }
+
+
