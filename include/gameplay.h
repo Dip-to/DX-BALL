@@ -13,6 +13,34 @@ extern int level2, level1, level3, enter , uivar , pvar , ovar , hvar , povar , 
 extern int Hscore , Help , Instruction , Controls , Powerup_info , Instruction2 , option , game_sesh , next_button ;
 //main menu
 
+extern float pupx_vel ;
+extern float pupy_vel ;
+extern int var ;
+extern int fire_left;
+
+extern SDL_Rect powerup_gameplay_rect;
+extern SDL_Texture *score_ttf_tex ;
+extern SDL_Texture *firetex ;
+extern SDL_Surface *bricks_surface ;
+//bricks tex
+extern SDL_Texture *bricks1 ;
+extern SDL_Texture *bricks2 ;
+extern SDL_Texture *bricks3 ;
+extern SDL_Texture *bricks4 ;
+extern SDL_Texture *bricks5 ;
+extern SDL_Texture *bricks21 ;
+extern SDL_Texture *bricks21_1 ;
+extern SDL_Texture *bricks25 ;
+extern SDL_Texture *bricks26 ;
+extern SDL_Texture *bricks27 ;
+extern SDL_Texture *bricks31 ;
+extern SDL_Texture *bricks32 ;
+extern SDL_Texture *bricks33 ;
+extern SDL_Texture *bricks34 ;
+extern SDL_Texture *bricks35 ;
+extern SDL_Texture *bricks36 ;
+extern SDL_Texture* bricks37;
+extern SDL_Texture* bricks37_1;
 
 void score_and_life_print(int score,int life); //game_physics
 void bricks_and_bar_load(); //game_physics

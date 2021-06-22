@@ -507,3 +507,245 @@ void ball_music_and_powerup_load()
 	}
  	font_load();
 }
+
+void bricks_and_bar_load()
+{
+	//bar
+	char gnrlbar[4][100] = {"res/gnrl_bar/gbar1.jpg", "res/gnrl_bar/gbar2.jpg",
+							"res/gnrl_bar/gbar3.jpg", "res/gnrl_bar/gbar4.jpg"};
+	char magfirebar[4][100] = {"res/magfire_bar/mfbar1.jpg", "res/magfire_bar/mfbar2.jpg",
+							   "res/magfire_bar/mfbar3.jpg", "res/magfire_bar/mfbar4.jpg"};
+	char firebar[4][100] = {"res/fire_bar/fbar1.jpg", "res/fire_bar/fbar2.jpg",
+							"res/fire_bar/fbar3.jpg", "res/fire_bar/fbar4.jpg"};
+	char magneticbar[4][100] = {"res/magnet_bar/mbar1.jpg", "res/magnet_bar/mbar2.jpg",
+								"res/magnet_bar/mbar3.jpg", "res/magnet_bar/mbar4.jpg"};
+	SDL_Surface *tmp1 = NULL;
+	SDL_Surface *tmp2 = NULL;
+	SDL_Surface *tmp3 = NULL;
+	SDL_Surface *tmp4 = NULL;
+
+	for (int i = 0; i < 4; i++)
+	{
+		tmp1 = IMG_Load(gnrlbar[i]);
+		tmp2 = IMG_Load(magneticbar[i]);
+		tmp3 = IMG_Load(magfirebar[i]);
+		tmp4 = IMG_Load(firebar[i]);
+		if (!tmp1 || !tmp2 || !tmp3 || !tmp4)
+		{
+			printf("Bar load %d Surface Error: %s\n", i, IMG_GetError());
+			SDL_DestroyRenderer(rend);
+			SDL_DestroyWindow(win);
+			SDL_Quit();
+			return;
+		}
+		gbartex[i].tex = SDL_CreateTextureFromSurface(rend, tmp1);
+		mbartex[i].tex = SDL_CreateTextureFromSurface(rend, tmp2);
+		mfbartex[i].tex = SDL_CreateTextureFromSurface(rend, tmp3);
+		fbartex[i].tex = SDL_CreateTextureFromSurface(rend, tmp4);
+		SDL_FreeSurface(tmp1);
+		SDL_FreeSurface(tmp2);
+		SDL_FreeSurface(tmp3);
+		SDL_FreeSurface(tmp4);
+	}
+
+	//bricks_intialize
+	bricks_surface = IMG_Load("res/Bricks/tile1.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks1 load Surface Error: %s\n", IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return;
+	}
+	bricks1 = SDL_CreateTextureFromSurface(rend, bricks_surface);
+	SDL_FreeSurface(bricks_surface);
+	bricks_surface = IMG_Load("res/Bricks/tile2.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks2 load Surface Error: %s\n", IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return;
+	}
+	bricks2 = SDL_CreateTextureFromSurface(rend, bricks_surface);
+	SDL_FreeSurface(bricks_surface);
+	bricks_surface = IMG_Load("res/Bricks/tile3.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks3 load Surface Error: %s\n", IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return;
+	}
+	bricks3 = SDL_CreateTextureFromSurface(rend, bricks_surface);
+	SDL_FreeSurface(bricks_surface);
+	bricks_surface = IMG_Load("res/Bricks/tile4.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks4 load Surface Error: %s\n", IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return;
+	}
+	bricks4 = SDL_CreateTextureFromSurface(rend, bricks_surface);
+	SDL_FreeSurface(bricks_surface);
+
+	bricks_surface = IMG_Load("res/Bricks/tile21.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks21 load Surface Error: %s\n", IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return;
+	}
+	bricks21 = SDL_CreateTextureFromSurface(rend, bricks_surface);
+	SDL_FreeSurface(bricks_surface);
+
+	bricks_surface = IMG_Load("res/Bricks/tile21_1.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks21_1 load Surface Error: %s\n", IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return;
+	}
+	bricks21_1 = SDL_CreateTextureFromSurface(rend, bricks_surface);
+	SDL_FreeSurface(bricks_surface);
+
+	bricks_surface = IMG_Load("res/Bricks/tile25.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks25 load Surface Error: %s\n", IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return;
+	}
+	bricks25 = SDL_CreateTextureFromSurface(rend, bricks_surface);
+	SDL_FreeSurface(bricks_surface);
+
+	bricks_surface = IMG_Load("res/Bricks/tile26.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks26 load Surface Error: %s\n", IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return;
+	}
+	bricks26 = SDL_CreateTextureFromSurface(rend, bricks_surface);
+	SDL_FreeSurface(bricks_surface);
+
+	bricks_surface = IMG_Load("res/Bricks/tile27.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks27 load Surface Error: %s\n", IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return;
+	}
+	bricks27 = SDL_CreateTextureFromSurface(rend, bricks_surface);
+	SDL_FreeSurface(bricks_surface);
+	bricks_surface = IMG_Load("res/Bricks/tile31.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks31 load Surface Error: %s\n", IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return;
+	}
+	bricks31 = SDL_CreateTextureFromSurface(rend, bricks_surface);
+	SDL_FreeSurface(bricks_surface);
+	bricks_surface = IMG_Load("res/Bricks/tile32.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks32 load Surface Error: %s\n", IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return;
+	}
+	bricks32 = SDL_CreateTextureFromSurface(rend, bricks_surface);
+	SDL_FreeSurface(bricks_surface);
+	bricks_surface = IMG_Load("res/Bricks/tile33.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks33 load Surface Error: %s\n", IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return;
+	}
+	bricks33 = SDL_CreateTextureFromSurface(rend, bricks_surface);
+	SDL_FreeSurface(bricks_surface);
+	bricks_surface = IMG_Load("res/Bricks/tile34.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks34 load Surface Error: %s\n", IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return;
+	}
+	bricks34 = SDL_CreateTextureFromSurface(rend, bricks_surface);
+	SDL_FreeSurface(bricks_surface);
+
+	bricks_surface = IMG_Load("res/Bricks/tile35.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks35 load Surface Error: %s\n", IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return;
+	}
+	bricks35 = SDL_CreateTextureFromSurface(rend, bricks_surface);
+	SDL_FreeSurface(bricks_surface);
+
+	bricks_surface = IMG_Load("res/Bricks/tile36.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks36 load Surface Error: %s\n", IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return;
+	}
+	bricks36 = SDL_CreateTextureFromSurface(rend, bricks_surface);
+	SDL_FreeSurface(bricks_surface);
+
+	bricks_surface=IMG_Load("res/Bricks/tile37.jpg");
+	if (!bricks_surface)
+	{
+		printf("bricks37 load Surface Error: %s\n",IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return ;
+	}
+	bricks37_1=SDL_CreateTextureFromSurface(rend,bricks_surface);
+	bricks37=NULL;
+	SDL_FreeSurface(bricks_surface);
+
+	//fire load
+	tmp1 = IMG_Load("res/fire.jpg");
+	if (!tmp1)
+	{
+		printf("Fire load Surface Error: %s\n", IMG_GetError());
+		SDL_DestroyRenderer(rend);
+		SDL_DestroyWindow(win);
+		SDL_Quit();
+		return;
+	}
+	firetex = SDL_CreateTextureFromSurface(rend, tmp1);
+	SDL_FreeSurface(tmp1);
+}
+
