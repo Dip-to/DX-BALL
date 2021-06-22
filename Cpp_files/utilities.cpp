@@ -1,15 +1,6 @@
 #include "header.h"
 
-// float min(float x, float y)
-// {
-// 	if(x<y) return x;
-// 	return y;
-// }
-// float max(float x, float y)
-// {
-// 	if(x>y) return x;
-// 	return y;
-// }
+
 
 int gameover_page=0,fire_count=0;
 SDL_Texture* convert=NULL;
@@ -402,6 +393,141 @@ void lbutton()
 	}
 }
 
+void mainmenu_level_renderer()
+{
+	if (mainmenu == 1)
+	{
+
+		if (!mainmenu_render())
+			close = 1;
+		//printf("%d %d\n",sound,music_run);
+
+		level2 = 1;
+		level3 = 1;
+		level1 = 1;
+		//uivar=0;
+	}
+	else if (gameover == 0 and pause)
+	{
+		pause_menu_renderer();
+	}
+	else if (gameover == 0 and life)
+	{
+
+		game_physics();
+		SDL_RenderClear(rend);
+		if (level == 1)
+		{
+			if (level1 == 1)
+			{
+				if (gamesound == 1)
+					Mix_PlayChannel(-1, level_up, 0);
+				SDL_RenderCopy(rend, level1_back, NULL, &level_background);
+				SDL_RenderPresent(rend);
+				SDL_Delay(1000);
+				SDL_RenderClear(rend);
+				level1 = 0;
+			}
+			else
+			{
+				//if(ball.y)
+				SDL_RenderCopy(rend, background1, NULL, &background);
+				bar_anim = bar_and_bricks_render(bar_anim, level);
+				//life
+				//scoring
+				score_and_life_print(score, life);
+				// SDL_RenderCopy(rend, tex, NULL, &bar);
+				// SDL_RenderCopy(rend, gbartex[1].tex, NULL, &bar);
+				int fx, fy;
+				int buttons = SDL_GetGlobalMouseState(&fx, &fy);
+
+				firerender(fbar | mfbar);
+				powerup_renderer(power_up.hoise, power_up.type);
+				SDL_RenderCopy(rend, tex2, NULL, &ball);
+
+				SDL_RenderPresent(rend);
+			}
+		}
+		else if (level == 2)
+		{
+			if (level2 == 1)
+			{
+				if (gamesound == 1 && level == 2)
+					Mix_PlayChannel(-1, level_up, 0);
+				SDL_RenderCopy(rend, level2_back, NULL, &level_background);
+				SDL_RenderPresent(rend);
+				SDL_Delay(1000);
+				SDL_RenderClear(rend);
+				level2 = 0;
+			}
+			else
+			{
+				SDL_RenderCopy(rend, background2, NULL, &background);
+				bar_anim = bar_and_bricks_render(bar_anim, level);
+				//life
+				//scoring
+				score_and_life_print(score, life);
+				// SDL_RenderCopy(rend, tex, NULL, &bar);
+				// SDL_RenderCopy(rend, gbartex[1].tex, NULL, &bar);
+				int fx, fy;
+				int buttons = SDL_GetGlobalMouseState(&fx, &fy);
+
+				firerender(fbar | mfbar);
+				powerup_renderer(power_up.hoise, power_up.type);
+				SDL_RenderCopy(rend, tex2, NULL, &ball);
+
+				SDL_RenderPresent(rend);
+			}
+		}
+		else if (level == 3)
+		{
+			if (level3 == 1)
+			{
+				if (gamesound == 1 && level == 3)
+					Mix_PlayChannel(-1, level_up, 0);
+				SDL_RenderCopy(rend, level3_back, NULL, &level_background);
+				SDL_RenderPresent(rend);
+				SDL_Delay(1000);
+				SDL_RenderClear(rend);
+				level3 = 0;
+			}
+			else
+			{
+				SDL_RenderCopy(rend, background3, NULL, &background);
+				bar_anim = bar_and_bricks_render(bar_anim, level);
+				//life
+				//scoring
+				score_and_life_print(score, life);
+				// SDL_RenderCopy(rend, tex, NULL, &bar);
+				// SDL_RenderCopy(rend, gbartex[1].tex, NULL, &bar);
+				int fx, fy;
+				int buttons = SDL_GetGlobalMouseState(&fx, &fy);
+
+				firerender(fbar | mfbar);
+				powerup_renderer(power_up.hoise, power_up.type);
+				SDL_RenderCopy(rend, tex2, NULL, &ball);
+
+				SDL_RenderPresent(rend);
+			}
+		}
+		SDL_Delay(1000 / 80);
+	}
+	else if (gameover == 1 or life == 0 or level > 3)
+	{
+
+		BALL_SPEED = 20, theta = 30;
+		dx = BALL_SPEED * sin(theta * acos(-1) / 180), dy = BALL_SPEED * cos(theta * acos(-1) / 180);
+		SDL_RenderClear(rend);
+
+		SDL_SetRenderDrawColor(rend, 0xFF, 0xFF, 0xFF, 0xFF);
+		SDL_RenderDrawPoint(rend, 10, 20);
+		SDL_SetRenderDrawColor(rend, 0x00, 0x00, 0x00, 0xFF);
+
+		name_write();
+		SDL_RenderPresent(rend);
+		reset_game(0);
+	}
+}
 
 
 

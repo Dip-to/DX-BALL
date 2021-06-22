@@ -11,7 +11,7 @@ int levelup_bricks_initialization(int level); //data load
 int mainmenu_render(); //mainmenu
 void name_write(); //utilities
 void option_render(); //mainmenu
-void mainmenu_level_renderer(); //mainmenu
+void mainmenu_level_renderer(); //utilities
 void highscore_render(); //mainmenu
 void pause_menu_renderer(); //mainmenu
 void help_render(); //mainmenu
