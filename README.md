@@ -6,3 +6,4 @@
     * Others : Install equaivalent packages of the above mentioned. 
     * Alternatively you can run ```setup.sh```
   * Compile with ```make``` 
+* In case of playing with mouse make sure to put your mouse's  ```CURSOR``` inside the window.
