@@ -56,4 +56,11 @@ extern SDL_Texture *pause_back_tex;
 extern SDL_Texture *instruction_back_tex;
 extern SDL_Texture *continue_tex;
 
+void mainmenu_load(); //mainmenu
+int mainmenu_render(); //mainmenu
+void option_render(); //mainmenu
+void highscore_render(); //mainmenu
+void pause_menu_renderer(); //mainmenu
+void help_render(); //mainmenu
+
 #endif

@@ -17,6 +17,8 @@
 #include "pre_declare.h"
 #include "Struct.h"
 #include "mainmenu_resources.h"
+#include "game_physics.h"
+#include "end.h"
 #include <math.h>
 
 #endif
