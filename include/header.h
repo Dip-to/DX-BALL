@@ -9,8 +9,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 
-#include "gameplay.h"
 #include "utils.h"
 #include "sound.h"
 #include "gameplay.h"
@@ -19,6 +19,7 @@
 #include "mainmenu_resources.h"
 #include "game_physics.h"
 #include "end.h"
-#include <math.h>
+#include "powerup.h"
+
 
 #endif

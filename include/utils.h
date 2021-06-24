@@ -30,7 +30,7 @@ int levelup_bricks_initialization(int level); //data load
 void name_write(); //utilities
 void mainmenu_level_renderer(); //utilities
 void ball_music_and_powerup_load(); //data load
-
+void font_load(); // utilities
 void lbutton(); //utilities
 
 
