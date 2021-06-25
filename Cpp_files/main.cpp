@@ -47,26 +47,6 @@ int main(int agr, char *args[])
 				case SDL_SCANCODE_RIGHT:
 					x_pos = min(WINDOW_WIDTH - bar.w, x_pos + (SCROLL_SPEED) / 5);
 					break;
-				case SDL_SCANCODE_0:
-					gbar = 1;
-					mfbar = fbar = mbar = 0;
-					break;
-				case SDL_SCANCODE_1:
-					mfbar = 1;
-					gbar = fbar = mbar = 0;
-					break;
-				case SDL_SCANCODE_2:
-					fbar = 1;
-					gbar = mbar = mfbar = 0;
-					fire_left+=40;
-					break;
-				case SDL_SCANCODE_3:
-					mbar = 1;
-					mfbar = fbar = gbar = 0;
-					break;
-				case SDL_SCANCODE_6:
-					mainmenu = 1 - mainmenu;
-					break;
 				case SDL_SCANCODE_ESCAPE:
 					pause = 1 - pause;
 					break;
